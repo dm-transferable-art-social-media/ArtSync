@@ -17,7 +17,7 @@ const LoginForm = () => {
     setState((prevState) => ({ ...prevState, hasError: !success }));
   
     if (success) {
-      navigate("/index"); 
+      navigate("/home"); 
     }
   };
   return (
