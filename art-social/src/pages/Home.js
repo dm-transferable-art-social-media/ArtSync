@@ -1,11 +1,15 @@
+import React from "react";
 import Heading from "../Heading";
-function Home() {
-  return (
-    <div>
-      <Heading></Heading>
-      <div>Home page</div>
-    </div>
-  );
+
+class Home extends React.Component {
+  render() {
+    return (
+      <div>
+        <Heading />
+        <div>Home page</div>
+      </div>
+    );
+  }
 }
 
 export default Home;
