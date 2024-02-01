@@ -5,6 +5,7 @@ import {
   getTimeline,
   deletePost,
 } from "../lib/bsky.ts";
+import Heading from "../Heading";
 
 function UserPosts() {
   const [posts, setPosts] = useState([]);
@@ -58,6 +59,7 @@ function UserPosts() {
 
   return (
     <div>
+      <Heading></Heading>
       <h1>User Posts</h1>
       <p>Handle: {handle}</p>
       {loading ? (
