@@ -1,7 +1,6 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-
+import React, { useState } from 'react';
 import { createSession } from "../lib/bsky.ts";
+import { useNavigate } from "react-router-dom";
 
 const LoginForm = () => {
   const navigate = useNavigate();
@@ -13,36 +12,49 @@ const LoginForm = () => {
 
   const login = async () => {
     const { success } = await createSession(state);
-  
+
     setState((prevState) => ({ ...prevState, hasError: !success }));
-  
+
     if (success) {
-      navigate("/home"); 
+      navigate("/home");
     }
   };
+
+  const handleIdentifierChange = (e) => {
+    setState({
+      ...state,
+      identifier: e.target.value,
+      hasError: false,
+    });
+  };
+
+  const handlePasswordChange = (e) => {
+    setState({
+      ...state,
+      password: e.target.value,
+      hasError: false,
+    });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    login();
+  };
+
   return (
     <div>
-      <p>Minimal Bluesky Client for bsky.social</p>
+      <p>Art Sync</p>
 
       <form
         className={state.hasError ? "has-error" : ""}
-        onSubmit={(e) => {
-          e.preventDefault();
-          login();
-        }}
+        onSubmit={handleSubmit}
       >
         <div className="form-group">
           <label htmlFor="identifier">Identifier (email or handle)</label>
           <input
             id="identifier"
             value={state.identifier}
-            onChange={(e) =>
-              setState({
-                ...state,
-                identifier: e.target.value,
-                hasError: false,
-              })
-            }
+            onChange={handleIdentifierChange}
             className="form-input"
             type="text"
           />
@@ -53,9 +65,7 @@ const LoginForm = () => {
           <input
             id="password"
             value={state.password}
-            onChange={(e) =>
-              setState({ ...state, password: e.target.value, hasError: false })
-            }
+            onChange={handlePasswordChange}
             className="form-input"
             type="password"
           />

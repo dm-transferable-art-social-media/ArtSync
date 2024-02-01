@@ -1,5 +1,5 @@
-import Heading from "../Heading";
 import React, { useState, useEffect } from "react";
+import Heading from "../Heading";
 import {
   getMyHandle,
   tryResumeSession,
