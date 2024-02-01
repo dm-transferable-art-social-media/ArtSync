@@ -3,6 +3,8 @@ import {
   getMyHandle,
   tryResumeSession,
   getTimeline,
+  getProfile,
+  getAuthorFeed,
   deletePost,
 } from "../lib/bsky.ts";
 import Heading from "../Heading";
@@ -19,7 +21,7 @@ function UserPosts() {
         await tryResumeSession();
 
         // Fetch user timeline
-        const [timeline] = await getTimeline({ limit: 10 });
+        const [timeline] = await getAuthorFeed();
         console.log(timeline);
         // Set fetched posts
         setPosts(timeline);
