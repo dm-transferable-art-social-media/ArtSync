@@ -23,7 +23,7 @@ import {
   ProfileViewDetailed,
   repost,
   unfollow,
-} from "@/lib/bsky";
+} from "../lib/bsky.ts";
 
 import { Overwrite } from "./well-typed";
 
