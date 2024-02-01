@@ -1,54 +1,52 @@
-import React, { useState, useEffect } from "react";
+// Profile.js
+import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import {
   getMyHandle,
   tryResumeSession,
-  getTimeline,
-  getProfile,
   getAuthorFeed,
   deletePost,
-} from "../lib/bsky.ts";
-import Heading from "../Heading";
-import profileStyles from './Styles/profileStyles.module.css';
+} from '../lib/bsky.ts';
+import Heading from '../Heading';
+import ProfileTimeline from './ProfileTimeline';
+import ProfileGrid from './ProfileGrid';
 
-function UserPosts() {
+const Profile = () => {
+  const navigate = useNavigate();
+  const [view, setView] = useState('timeline');
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [handle, setHandle] = useState("");
+  const [handle, setHandle] = useState('');
 
   useEffect(() => {
     async function fetchData() {
       try {
-        // Attempt to resume session
-        await tryResumeSession();
-
-        // Fetch user timeline
         const [timeline] = await getAuthorFeed();
-        console.log(timeline);
-        // Set fetched posts
         setPosts(timeline);
-        console.log(posts[0]);
         setLoading(false);
       } catch (error) {
-        console.error("Error fetching user posts:", error);
+        console.error('Error fetching user posts:', error);
         setLoading(false);
       }
     }
 
-    fetchData();
-  }, []);
-
-  useEffect(() => {
     async function fetchHandle() {
       try {
-        const userHandle = getMyHandle();
+        const userHandle = await getMyHandle();
         setHandle(userHandle);
       } catch (error) {
-        console.error("Error fetching user handle:", error);
+        console.error('Error fetching user handle:', error);
       }
     }
 
-    fetchHandle();
-  }, []);
+    async function initialize() {
+      await tryResumeSession();
+      await fetchHandle();
+      await fetchData();
+    }
+
+    initialize();
+  }, []); // Empty dependency array to run once on mount
 
   const handleDeletePost = async (uri) => {
     try {
@@ -56,41 +54,31 @@ function UserPosts() {
       const [timeline] = await getAuthorFeed();
       setPosts(timeline);
     } catch (error) {
-      console.error("Error deleting post:", error);
+      console.error('Error deleting post:', error);
     }
   };
 
   return (
     <div>
       <Heading></Heading>
-      <h1>User Posts</h1>
       <p>Handle: {handle}</p>
+      <button onClick={() => setView('timeline')}>Switch to Timeline</button>
+      <button onClick={() => setView('grid')}>Switch to Grid View</button>
+
       {loading ? (
-        <p>Loading posts...</p>
+        <p>Loading...</p>
       ) : (
-        <ul>
-          {posts.map((post) => (
-            <li key={post.post.cid}>
-              {" "}
-              {/* Assuming 'cid' is unique identifier for posts */}
-              <p> 
-              {/* you may want to display images as thumbnail instead of fullsize.
-              - currently only supports the first image */}
-              {post.post.embed && post.post.embed.images && post.post.embed.images[0] && (
-                <div className={profileStyles.imageThumbnailBox}>
-                  <img src={post.post.embed.images[0].fullsize} className={profileStyles.imageThumbnail} alt="" />
-                  </div>
-              )}
-                {post.post.record.text}</p> {/* Accessing the text content */}
-              <button onClick={() => handleDeletePost(post.post.uri)}>
-                Delete
-              </button>
-            </li>
-          ))}
-        </ul>
+        <div>
+          {view === 'timeline' && (
+            <ProfileTimeline posts={posts} handleDeletePost={handleDeletePost} />
+          )}
+          {view === 'grid' && (
+            <ProfileGrid posts={posts} handleDeletePost={handleDeletePost} />
+          )}
+        </div>
       )}
     </div>
   );
-}
+};
 
-export default UserPosts;
+export default Profile;

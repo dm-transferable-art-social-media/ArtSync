@@ -8,4 +8,17 @@
     width: 200px;
     height: 200px;
     overflow: hidden;
+}
+
+.gridContainer {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 16px;
   }
+  
+.gridItem {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+  
