@@ -8,6 +8,7 @@ import {
   deletePost,
 } from "../lib/bsky.ts";
 import Heading from "../Heading";
+import profileStyles from './Styles/profileStyles.module.css';
 
 function UserPosts() {
   const [posts, setPosts] = useState([]);
@@ -52,7 +53,7 @@ function UserPosts() {
   const handleDeletePost = async (uri) => {
     try {
       await deletePost({ uri });
-      const [timeline] = await getTimeline({ limit: 10 });
+      const [timeline] = await getAuthorFeed();
       setPosts(timeline);
     } catch (error) {
       console.error("Error deleting post:", error);
@@ -72,7 +73,15 @@ function UserPosts() {
             <li key={post.post.cid}>
               {" "}
               {/* Assuming 'cid' is unique identifier for posts */}
-              <p>{post.post.record.text}</p> {/* Accessing the text content */}
+              <p> 
+              {/* you may want to display images as thumbnail instead of fullsize.
+              - currently only supports the first image */}
+              {post.post.embed && post.post.embed.images && post.post.embed.images[0] && (
+                <div className={profileStyles.imageThumbnailBox}>
+                  <img src={post.post.embed.images[0].fullsize} className={profileStyles.imageThumbnail} alt="" />
+                  </div>
+              )}
+                {post.post.record.text}</p> {/* Accessing the text content */}
               <button onClick={() => handleDeletePost(post.post.uri)}>
                 Delete
               </button>
