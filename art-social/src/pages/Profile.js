@@ -13,7 +13,7 @@ import ProfileGrid from './ProfileGrid';
 
 const Profile = () => {
   const navigate = useNavigate();
-  const [view, setView] = useState('timeline');
+  const [view, setView] = useState('grid');
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [handle, setHandle] = useState('');
