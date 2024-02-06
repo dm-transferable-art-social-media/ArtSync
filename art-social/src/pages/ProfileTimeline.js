@@ -1,4 +1,3 @@
-// ProfileTimeline.js
 import React from 'react';
 import profileStyles from './Styles/profileStyles.module.css';
 
