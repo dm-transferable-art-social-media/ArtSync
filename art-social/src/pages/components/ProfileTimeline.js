@@ -1,5 +1,5 @@
 import React from 'react';
-import profileStyles from './Styles/profileStyles.module.css';
+import profileStyles from '../styles/profileStyles.module.css';
 
 const ProfileTimeline = ({posts, handleDeletePost}) => {
 

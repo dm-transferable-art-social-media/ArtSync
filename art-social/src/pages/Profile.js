@@ -7,8 +7,8 @@ import {
   deletePost,
 } from '../lib/bsky.ts';
 import Heading from '../Heading';
-import ProfileTimeline from './ProfileTimeline';
-import ProfileGrid from './ProfileGrid';
+import ProfileTimeline from './components/ProfileTimeline';
+import ProfileGrid from './components/ProfileGrid';
 
 const Profile = () => {
   const navigate = useNavigate();
