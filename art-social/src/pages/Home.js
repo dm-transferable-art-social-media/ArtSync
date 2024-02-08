@@ -69,9 +69,6 @@ function Home() {
               {" "}
               {/* Assuming 'cid' is unique identifier for posts */}
               <p>{post.post.record.text}</p> {/* Accessing the text content */}
-              <button onClick={() => handleDeletePost(post.post.uri)}>
-                Delete
-              </button>
             </li>
           ))}
         </ul>
