@@ -63,7 +63,8 @@ const Profile = () => {
       <p>Handle: {handle}</p>
       <button onClick={() => setView('timeline')}>Switch to Timeline</button>
       <button onClick={() => setView('grid')}>Switch to Grid View</button>
-
+      {/* Button to go to create post page*/}
+      <button onClick={() => navigate("/create", { replace: true })}>Create New Post</button>
       {loading ? (
         <p>Loading...</p>
       ) : (

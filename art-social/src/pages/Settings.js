@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
 import Heading from "../Heading";
 import { postText } from "../lib/bsky.ts";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const Settings = () => {
   const [newPostText, setNewPostText] = useState(""); // State to hold the text of the new post
   const [showPopup, setShowPopup] = useState(false); // State to control the visibility of the popup
   const [confirmationMessage, setConfirmationMessage] = useState(""); // State to hold the confirmation message
-
+  const navigate = useNavigate();
   // Handler for input change
   const handleInputChange = (event) => {
     setNewPostText(event.target.value);
@@ -47,10 +48,9 @@ const Settings = () => {
       <Heading />
       <div>Settings page</div>
       <div>
-        {/* Button to open the popup */}
-        <button onClick={openPopup}>Create New Post</button>
+        {/* Button to open the popup <button onClick={() => navigate("/create", { replace: true })}>Create New Post</button>*/}
         {/* Popup for creating a new post */}
-        {showPopup && (
+        {/*showPopup && (
           <div className="popup">
             <input
               type="text"
@@ -61,7 +61,7 @@ const Settings = () => {
             <button onClick={createNewPost}>Create Post</button>
             <button onClick={closePopup}>Cancel</button>
           </div>
-        )}
+        )*/}
       </div>
       {/* Confirmation message */}
       {confirmationMessage && <div>{confirmationMessage}</div>}

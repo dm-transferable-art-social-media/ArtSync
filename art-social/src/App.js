@@ -12,6 +12,7 @@ import ProfileTimeline from "./pages/components/ProfileTimeline.js";
 import Notifications from "./pages/Notifications.js";
 import Search from "./pages/Search.js";
 import Settings from "./pages/Settings.js";
+import CreatePost from "./pages/components/CreatePost.js";
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
         <Route path="/profile/timeline" element={<ProfileTimeline />}></Route>
         <Route path="/search" element={<Search />}></Route>
         <Route path="/settings" element={<Settings />}></Route>
+        <Route path="/create" element={<CreatePost />}></Route>
       </Routes>
     </BrowserRouter>
   );
