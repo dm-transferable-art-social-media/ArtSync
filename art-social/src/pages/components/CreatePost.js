@@ -13,17 +13,6 @@ const handleInputChange = (event) => {
     setNewPostText(event.target.value);
   };
 
-  /*// Handler for opening the popup
-  const openPopup = () => {
-    setShowPopup(true);
-  };
-
-  // Handler for closing the popup
-  const closePopup = () => {
-    setShowPopup(false);
-    // Clear the input field when closing the popup
-    setNewPostText("");
-  };*/
 
   // Handler for creating a new post
   const createNewPost = async () => {
@@ -33,7 +22,7 @@ const handleInputChange = (event) => {
         setConfirmationMessage("New post created successfully!");
         // Optionally, you can add a success message or update the state to reflect the successful creation of the post
         console.log("New post created successfully!");
-        
+
       }
       else{
         console.log("Nuh-uh! (An empty string was entered)");

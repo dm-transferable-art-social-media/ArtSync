@@ -10,6 +10,7 @@ import Heading from "../Heading";
 import ProfileTimeline from "./components/ProfileTimeline.js";
 import ProfileGrid from "./components/ProfileGrid";
 import profileStyles from "./Styles/profileStyles.module.css";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const Profile = () => {
   const [view, setView] = useState("grid");
@@ -17,6 +18,8 @@ const Profile = () => {
   const [loading, setLoading] = useState(true);
   const [handle, setHandle] = useState("");
   const [profile, setProfile] = useState("");
+  const navigate = useNavigate();
+  
 
   useEffect(() => {
     async function fetchData() {
@@ -102,6 +105,7 @@ const Profile = () => {
       </div>
       <button onClick={() => setView("grid")}>Switch to Grid View</button>
       <button onClick={() => setView("timeline")}>Switch to Timeline</button>
+      <button onClick={() => navigate("/create", { replace: true })}>Create New Post</button>
 
       {loading ? (
         <p>Loading...</p>
@@ -116,6 +120,7 @@ const Profile = () => {
           {view === "grid" && (
             <ProfileGrid posts={posts} handleDeletePost={handleDeletePost} />
           )}
+         
         </div>
       )}
     </div>
