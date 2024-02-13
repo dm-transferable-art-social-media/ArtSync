@@ -4,7 +4,7 @@
     padding: 0;
     overflow: hidden;
     width: 100%;
-    background-color: #333;
+    background-color: #8a8a8a;
     position: fixed;
     top: 0;
 }
@@ -15,7 +15,8 @@
 
 .tab li button {
     display: block;
-    color: white;
+    color: rgb(255, 255, 255);
+    background-color: #8a8a8a;
     border: none;
     text-align: center;
     padding: 14px 16px;
@@ -29,4 +30,8 @@
 .active {
     background-color: #4CAF50;
 
+}
+
+.logo {
+    padding-top: 3%;
 }
