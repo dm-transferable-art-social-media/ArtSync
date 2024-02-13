@@ -7,11 +7,12 @@ import Home from "./pages/Home.js";
 import LoginForm from "./pages/LoginForm";
 import Heading from "./Heading.js";
 import Profile from "./pages/Profile.js";
-import ProfileGrid from "./pages/ProfileGrid.js";
-import ProfileTimeline from "./pages/ProfileTimeline.js";
+import ProfileGrid from "./pages/components/ProfileGrid.js";
+import ProfileTimeline from "./pages/components/ProfileTimeline.js";
 import Notifications from "./pages/Notifications.js";
 import Search from "./pages/Search.js";
 import Settings from "./pages/Settings.js";
+import CreatePost from "./pages/components/CreatePost.js";
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
         <Route path="/profile/timeline" element={<ProfileTimeline />}></Route>
         <Route path="/search" element={<Search />}></Route>
         <Route path="/settings" element={<Settings />}></Route>
+        <Route path="/create" element={<CreatePost />}></Route>
       </Routes>
     </BrowserRouter>
   );
