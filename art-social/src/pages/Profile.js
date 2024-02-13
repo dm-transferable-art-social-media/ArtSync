@@ -1,22 +1,22 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from "react";
 import {
   getMyHandle,
   tryResumeSession,
   getAuthorFeed,
   deletePost,
-  getProfile
-} from '../lib/bsky.ts';
-import Heading from '../Heading';
-import ProfileGrid from './components/ProfileGrid.js';
-import ProfileTimeline from './components/ProfileTimeline.js';
-import profileStyles from './Styles/profileStyles.module.css';
+  getProfile,
+} from "../lib/bsky.ts";
+import Heading from "../Heading";
+import ProfileTimeline from "./components/ProfileTimeline.js";
+import ProfileGrid from "./components/ProfileGrid";
+import profileStyles from "./Styles/profileStyles.module.css";
 
 const Profile = () => {
-  const [view, setView] = useState('grid');
+  const [view, setView] = useState("grid");
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [handle, setHandle] = useState('');
-  const [profile, setProfile] = useState('');
+  const [handle, setHandle] = useState("");
+  const [profile, setProfile] = useState("");
 
   useEffect(() => {
     async function fetchData() {
@@ -25,7 +25,7 @@ const Profile = () => {
         setPosts(timeline);
         setLoading(false);
       } catch (error) {
-        console.error('Error fetching user posts:', error);
+        console.error("Error fetching user posts:", error);
         setLoading(false);
       }
     }
@@ -35,7 +35,7 @@ const Profile = () => {
         const userHandle = await getMyHandle();
         setHandle(userHandle);
       } catch (error) {
-        console.error('Error fetching user handle:', error);
+        console.error("Error fetching user handle:", error);
       }
     }
 
@@ -45,7 +45,7 @@ const Profile = () => {
         setProfile(userProfile);
         console.log(profile);
       } catch (error) {
-        console.error('Error fetching user profile:', error);
+        console.error("Error fetching user profile:", error);
       }
     }
 
@@ -65,12 +65,14 @@ const Profile = () => {
       const [timeline] = await getAuthorFeed();
       setPosts(timeline);
     } catch (error) {
-      console.error('Error deleting post:', error);
+      console.error("Error deleting post:", error);
     }
   };
 
-  const defaultAvatar = "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png";
-  const defaultBanner = "https://img.freepik.com/free-vector/stylish-hexagonal-line-pattern-background_1017-19742.jpg";
+  const defaultAvatar =
+    "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png";
+  const defaultBanner =
+    "https://img.freepik.com/free-vector/stylish-hexagonal-line-pattern-background_1017-19742.jpg";
 
   return (
     <div>
@@ -78,10 +80,18 @@ const Profile = () => {
       {/* user profile */}
       <div>
         <div className={profileStyles.imageThumbnailBox}>
-          <img src={profile.avatar ? profile.avatar : defaultAvatar} className={profileStyles.imageThumbnail} alt="avatar"></img>
+          <img
+            src={profile.avatar ? profile.avatar : defaultAvatar}
+            className={profileStyles.imageThumbnail}
+            alt="avatar"
+          ></img>
         </div>
         <div className={profileStyles.imageThumbnailBox}>
-          <img src={profile.banner ? profile.banner : defaultBanner} className={profileStyles.imageThumbnail} alt="banner"></img>
+          <img
+            src={profile.banner ? profile.banner : defaultBanner}
+            className={profileStyles.imageThumbnail}
+            alt="banner"
+          ></img>
         </div>
         <p>Handle: {handle}</p>
         <p>DisplayName: {profile.displayName}</p>
@@ -90,17 +100,20 @@ const Profile = () => {
         <p>Follows Count: {profile.followsCount}</p>
         <p>Posts Count: {profile.postsCount}</p>
       </div>
-      <button onClick={() => setView('grid')}>Switch to Grid View</button>
-      <button onClick={() => setView('timeline')}>Switch to Timeline</button>
+      <button onClick={() => setView("grid")}>Switch to Grid View</button>
+      <button onClick={() => setView("timeline")}>Switch to Timeline</button>
 
       {loading ? (
         <p>Loading...</p>
       ) : (
         <div>
-          {view === 'timeline' && (
-            <ProfileTimeline posts={posts} handleDeletePost={handleDeletePost} />
+          {view === "timeline" && (
+            <ProfileTimeline
+              posts={posts}
+              handleDeletePost={handleDeletePost}
+            />
           )}
-          {view === 'grid' && (
+          {view === "grid" && (
             <ProfileGrid posts={posts} handleDeletePost={handleDeletePost} />
           )}
         </div>
