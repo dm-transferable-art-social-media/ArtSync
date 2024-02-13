@@ -7,8 +7,8 @@ import {
   getProfile
 } from '../lib/bsky.ts';
 import Heading from '../Heading';
-import ProfileTimeline from './ProfileTimeline';
-import ProfileGrid from './ProfileGrid';
+import ProfileGrid from './components/ProfileGrid.js';
+import ProfileTimeline from './components/ProfileTimeline.js';
 import profileStyles from './Styles/profileStyles.module.css';
 
 const Profile = () => {
