@@ -1,19 +1,19 @@
 import React, { useState } from 'react';
-import Heading from "../Heading";
-import { postText } from "../lib/bsky.ts";
+import Heading from "../../Heading";
+import { postText } from "../../lib/bsky.ts";
 import { useLocation, useNavigate } from "react-router-dom";
 
-const Settings = () => {
+const CreatePost = () => {
   const [newPostText, setNewPostText] = useState(""); // State to hold the text of the new post
   const [showPopup, setShowPopup] = useState(false); // State to control the visibility of the popup
   const [confirmationMessage, setConfirmationMessage] = useState(""); // State to hold the confirmation message
   const navigate = useNavigate();
-  // Handler for input change
-  const handleInputChange = (event) => {
+// Handler for input change
+const handleInputChange = (event) => {
     setNewPostText(event.target.value);
   };
 
-  // Handler for opening the popup
+  /*// Handler for opening the popup
   const openPopup = () => {
     setShowPopup(true);
   };
@@ -23,7 +23,7 @@ const Settings = () => {
     setShowPopup(false);
     // Clear the input field when closing the popup
     setNewPostText("");
-  };
+  };*/
 
   // Handler for creating a new post
   const createNewPost = async () => {
@@ -33,6 +33,7 @@ const Settings = () => {
         setConfirmationMessage("New post created successfully!");
         // Optionally, you can add a success message or update the state to reflect the successful creation of the post
         console.log("New post created successfully!");
+        
       }
       else{
         console.log("Nuh-uh! (An empty string was entered)");
@@ -46,22 +47,16 @@ const Settings = () => {
   return (
     <div>
       <Heading />
-      <div>Settings page</div>
+      <div>Create Post</div>
       <div>
-        {/* Button to open the popup <button onClick={() => navigate("/create", { replace: true })}>Create New Post</button>*/}
-        {/* Popup for creating a new post */}
-        {/*showPopup && (
-          <div className="popup">
-            <input
+      <input
               type="text"
               value={newPostText}
               onChange={handleInputChange}
               placeholder="Enter text for the new post"
             />
             <button onClick={createNewPost}>Create Post</button>
-            <button onClick={closePopup}>Cancel</button>
-          </div>
-        )*/}
+            <button onClick={() => navigate("/profile", { replace: true })}>Cancel</button>
       </div>
       {/* Confirmation message */}
       {confirmationMessage && <div>{confirmationMessage}</div>}
@@ -69,4 +64,4 @@ const Settings = () => {
   );
 };
 
-export default Settings;
+export default CreatePost;
