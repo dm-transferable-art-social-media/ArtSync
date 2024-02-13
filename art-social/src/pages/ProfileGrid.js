@@ -2,7 +2,7 @@ import React from 'react';
 import profileStyles from './Styles/profileStyles.module.css';
 
 
-const ProfileGrid = ({posts, handleDeletePost}) => {
+const ProfileGrid = ({posts}) => {
   const postsWithImages = posts.filter(post => post.post.embed && post.post.embed.images && post.post.embed.images[0]);
   return (
     <div>
