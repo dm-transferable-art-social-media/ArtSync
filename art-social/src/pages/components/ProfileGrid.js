@@ -14,10 +14,6 @@ const ProfileGrid = ({posts}) => {
                     <img src={post.post.embed.images[0].fullsize} className={profileStyles.imageThumbnail} alt="" />
                     </div>
                 )}
-              <p>{post.post.record.text}</p>
-              <button onClick={() => handleDeletePost(post.post.uri)}>
-                Delete
-              </button>
             </div>
           ))}
         </div>
