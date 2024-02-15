@@ -33,7 +33,6 @@ class Notifications extends Component {
               <li key={index}>
                 Notification Type: {notification.reason} <br />
                 Notification Author: {notification.author.handle} <br />
-                Notification Subject: {notification.record.subject.uri}
                 {console.log(notification)}
               </li>
             ))}
