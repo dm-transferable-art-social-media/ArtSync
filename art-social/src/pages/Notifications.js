@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import Heading from "../Heading";
 import { getNotifications } from "../lib/bsky.ts";
 
 class Notifications extends Component {
@@ -26,7 +25,6 @@ class Notifications extends Component {
   render() {
     return (
       <div>
-        <Heading />
         <div>Notifications page</div>
         <div>
           <h2>Notifications</h2>

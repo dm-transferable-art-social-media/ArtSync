@@ -6,7 +6,6 @@ import {
   deletePost,
   getProfile
 } from '../lib/bsky.ts';
-import Heading from '../Heading';
 import ProfileTimeline from './ProfileTimeline';
 import ProfileGrid from './ProfileGrid';
 import profileStyles from './Styles/profileStyles.module.css';
@@ -74,7 +73,6 @@ const Profile = () => {
 
   return (
     <div>
-      <Heading></Heading>
       {/* user profile */}
       <div>
         <div className={profileStyles.imageThumbnailBox}>

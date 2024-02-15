@@ -1,7 +1,4 @@
-import logo from "./logo.svg";
 import "./App.css";
-
-import ReactDOM from "react-dom/client";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "./pages/Home.js";
 import LoginForm from "./pages/LoginForm";
@@ -16,6 +13,7 @@ import Settings from "./pages/Settings.js";
 function App() {
   return (
     <BrowserRouter>
+    <Heading />
       <Routes>
         <Route path="/" element={<LoginForm />}></Route>
         <Route path="/home" element={<Home />}></Route>

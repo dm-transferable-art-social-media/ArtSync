@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import Heading from "../Heading";
 import {
   getMyHandle,
   tryResumeSession,
@@ -58,7 +57,6 @@ function Home() {
 
   return (
     <div>
-      <Heading></Heading>
       <div>Home page</div>
       {loading ? (
         <p>Loading posts...</p>
