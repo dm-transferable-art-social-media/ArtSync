@@ -48,20 +48,13 @@ const Settings = () => {
       <Heading />
       <div>Settings page</div>
       <div>
+      <button onClick={() => closePopup()}>Light Mode</button>
+      <button onClick={() => openPopup()}>DARK MODE</button>
         {/* Button to open the popup <button onClick={() => navigate("/create", { replace: true })}>Create New Post</button>*/}
         {/* Popup for creating a new post */}
-        {/*showPopup && (
-          <div className="popup">
-            <input
-              type="text"
-              value={newPostText}
-              onChange={handleInputChange}
-              placeholder="Enter text for the new post"
-            />
-            <button onClick={createNewPost}>Create Post</button>
-            <button onClick={closePopup}>Cancel</button>
-          </div>
-        )*/}
+        {showPopup && (
+          <p>lol</p>
+        )}
       </div>
       {/* Confirmation message */}
       {confirmationMessage && <div>{confirmationMessage}</div>}

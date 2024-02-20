@@ -36,7 +36,7 @@ const Heading = () => {
 
   return (
     <div className="columns col-oneline p-2">
-      <h1 className={heading.logo} style={{ fontFamily: "Segoe UI Mono" }}>
+      <h1 className={heading.logo}>
         ArtSync
       </h1>
 
