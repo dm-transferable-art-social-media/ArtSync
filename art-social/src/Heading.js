@@ -1,6 +1,6 @@
 import { useLocation, useNavigate } from "react-router-dom";
 import { deleteSession } from "./lib/bsky.ts";
-import heading from "./pages/Styles/heading.module.css";
+import heading from "./pages/styles/heading.module.css";
 
 const Heading = () => {
   const location = useLocation();

@@ -8,7 +8,7 @@ import {
 } from "../lib/bsky.ts";
 import ProfileTimeline from "./components/ProfileTimeline.js";
 import ProfileGrid from "./components/ProfileGrid";
-import profileStyles from "./Styles/profileStyles.module.css";
+import profileStyles from "./styles/profileStyles.module.css";
 import { useLocation, useNavigate } from "react-router-dom";
 
 const Profile = () => {
