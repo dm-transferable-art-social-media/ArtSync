@@ -24,7 +24,6 @@ const ProfileTimeline = ({posts, handleDeletePost}) => {
                   <div className = {timelineStyles.postHandle}>@{single.post.author.handle}</div>
                   <div className = {timelineStyles.postTime}>{new Date(single.post.record.createdAt).toLocaleDateString()}</div>
                 </div>
-                <div className = {timelineStyles.postText}>{single.post.record.text}</div> {/* Accessing the text content */}
                 <div className = {timelineStyles.postImage}>
                   {single.post.embed && single.post.embed.images && single.post.embed.images[0] && (
                     <img
@@ -34,6 +33,7 @@ const ProfileTimeline = ({posts, handleDeletePost}) => {
                     />
                   )}
                 </div>
+                <div className = {timelineStyles.postText}>{single.post.record.text}</div> {/* Accessing the text content */}
               </div>
               <button onClick={() => handleDeletePost(single.post.uri)}>
                 Delete

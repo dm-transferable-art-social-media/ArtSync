@@ -83,7 +83,6 @@ function Home() {
                   <div className = {timelineStyles.postHandle}>@{single.post.author.handle}</div>
                   <div className = {timelineStyles.postTime}>{new Date(single.post.record.createdAt).toLocaleDateString()}</div>
                 </div>
-                <div className = {timelineStyles.postText}>{single.post.record.text}</div> {/* Accessing the text content */}
                 <div className = {timelineStyles.postImage}>
                   {single.post.embed && single.post.embed.images && single.post.embed.images[0] && (
                     <img
@@ -93,6 +92,7 @@ function Home() {
                     />
                   )}
                 </div>
+                <div className = {timelineStyles.postText}>{single.post.record.text}</div> {/* Accessing the text content */}
               </div>
             </li>
           ))}
