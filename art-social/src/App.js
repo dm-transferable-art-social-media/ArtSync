@@ -1,11 +1,9 @@
-import logo from "./logo.svg";
 import "./App.css";
-
-import ReactDOM from "react-dom/client";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "./pages/Home.js";
-import LoginForm from "./pages/LoginForm";
 import Heading from "./Heading.js";
+import Footer from "./Footer.js";
+import LoginForm from "./pages/LoginForm";
 import Profile from "./pages/Profile.js";
 import ProfileGrid from "./pages/components/ProfileGrid.js";
 import ProfileTimeline from "./pages/components/ProfileTimeline.js";
@@ -17,6 +15,7 @@ import CreatePost from "./pages/components/CreatePost.js";
 function App() {
   return (
     <BrowserRouter>
+    <Heading />
       <Routes>
         <Route path="/" element={<LoginForm />}></Route>
         <Route path="/home" element={<Home />}></Route>
@@ -28,6 +27,7 @@ function App() {
         <Route path="/settings" element={<Settings />}></Route>
         <Route path="/create" element={<CreatePost />}></Route>
       </Routes>
+      <Footer />
     </BrowserRouter>
   );
 }

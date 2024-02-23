@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import Heading from "../Heading";
 import {
   getMyHandle,
   tryResumeSession,
@@ -18,11 +17,9 @@ function Home() {
         await tryResumeSession();
 
         // Fetch user timeline
-        const [timeline] = await getTimeline({ limit: 10 });
-        console.log(timeline);
-        // Set fetched posts
+        const [timeline] = await getTimeline({ limit: 2 + 10 })
         setPosts(timeline);
-        console.log(posts[0]);
+        console.log(timeline);
         setLoading(false);
       } catch (error) {
         console.error("Error fetching user posts:", error);
@@ -51,6 +48,7 @@ function Home() {
       await deletePost({ uri });
       const [timeline] = await getTimeline({ limit: 10 });
       setPosts(timeline);
+      console.log(posts);
     } catch (error) {
       console.error("Error deleting post:", error);
     }
@@ -58,7 +56,6 @@ function Home() {
 
   return (
     <div>
-      <Heading></Heading>
       <div>Home page</div>
       {loading ? (
         <p>Loading posts...</p>
