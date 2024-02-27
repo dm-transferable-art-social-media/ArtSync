@@ -5,26 +5,42 @@ import { useLocation, useNavigate } from "react-router-dom";
 
 const CreatePost = () => {
   const [newPostText, setNewPostText] = useState(""); // State to hold the text of the new post
+  const [selectedImage, setSelectedImage] = useState(null);
   const [showPopup, setShowPopup] = useState(false); // State to control the visibility of the popup
   const [confirmationMessage, setConfirmationMessage] = useState(""); // State to hold the confirmation message
   const navigate = useNavigate();
-// Handler for input change
-const handleInputChange = (event) => {
+  // Handler for input change
+  const handleInputChange = (event) => {
     setNewPostText(event.target.value);
   };
 
+  const handleImageChange = (e) => {
+    setSelectedImage(e.target.files[0]);
+  };
 
+  const handleUpload = () => {
+    if (selectedImage) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        const imageData = reader.result;
+        const blob = new Blob([imageData], { type: selectedImage.type });
+        console.log('Blob:', blob);
+        return blob;
+      };
+      reader.readAsDataURL(selectedImage);
+    }
+  };
   // Handler for creating a new post
   const createNewPost = async () => {
     try {
-      if (newPostText !== ""){
+      if (newPostText !== "") {
         await postText({ text: newPostText }); // Call the postText function to create a new post
         setConfirmationMessage("New post created successfully!");
         // Optionally, you can add a success message or update the state to reflect the successful creation of the post
         console.log("New post created successfully!");
 
       }
-      else{
+      else {
         console.log("Nuh-uh! (An empty string was entered)");
       }
     } catch (error) {
@@ -38,14 +54,20 @@ const handleInputChange = (event) => {
       <Heading />
       <div>Create Post</div>
       <div>
-      <input
-              type="text"
-              value={newPostText}
-              onChange={handleInputChange}
-              placeholder="Enter text for the new post"
-            />
-            <button onClick={createNewPost}>Create Post</button>
-            <button onClick={() => navigate("/profile", { replace: true })}>Cancel</button>
+        <input
+          type="text"
+          value={newPostText}
+          onChange={handleInputChange}
+          placeholder="Enter text for the new post"
+        />
+        <input 
+          type="file" 
+          accept="image/*" 
+          onChange={handleImageChange} 
+        />
+        <br />
+        <button onClick={createNewPost}>Create Post</button>
+        <button onClick={() => navigate("/profile", { replace: true })}>Cancel</button>
       </div>
       {/* Confirmation message */}
       {confirmationMessage && <div>{confirmationMessage}</div>}
