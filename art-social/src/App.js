@@ -13,6 +13,7 @@ import Notifications from "./pages/Notifications.js";
 import Search from "./pages/Search.js";
 import Settings from "./pages/Settings.js";
 import CreatePost from "./pages/components/CreatePost.js";
+import UploadData from "./pages/UploadData.js";
 
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
         <Route path="/search" element={<Search />}></Route>
         <Route path="/settings" element={<Settings />}></Route>
         <Route path="/create" element={<CreatePost />}></Route>
+        <Route path="/upload" element={<UploadData />}></Route>
       </Routes>
     </BrowserRouter>
   );

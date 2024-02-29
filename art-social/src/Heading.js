@@ -32,6 +32,10 @@ const Heading = () => {
       routeName: "/settings",
       label: "Settings",
     },
+    {
+      routeName: "/upload",
+      label: "Upload",
+    },
   ];
 
   return (
