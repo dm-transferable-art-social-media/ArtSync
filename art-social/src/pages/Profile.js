@@ -80,27 +80,32 @@ const Profile = () => {
     <div>
       {/* user profile */}
       <div>
-        <div className={profileStyles.imageThumbnailBox}>
-          <img
-            src={profile.avatar ? profile.avatar : defaultAvatar}
-            className={profileStyles.imageThumbnail}
-            alt="avatar"
-          ></img>
-        </div>
-        <div className={profileStyles.imageThumbnailBox}>
+        <div className = {profileStyles.imageContainer}>
+        <div className={profileStyles.imageBannerBox}>
           <img
             src={profile.banner ? profile.banner : defaultBanner}
             className={profileStyles.imageThumbnail}
             alt="banner"
           ></img>
         </div>
-        <p>Handle: {handle}</p>
-        <p>DisplayName: {profile.displayName}</p>
-        <p>Description: {profile.description}</p>
-        <p>Followers Count: {profile.followersCount}</p>
-        <p>Follows Count: {profile.followsCount}</p>
-        <p>Posts Count: {profile.postsCount}</p>
+        <div className={profileStyles.imageProfileBox}>
+          <img
+            src={profile.avatar ? profile.avatar : defaultAvatar}
+            className={profileStyles.imageThumbnail}
+            alt="avatar"
+          ></img>
+          </div>
+        </div>
+
+        <div className = {profileStyles.profileDisplayName}>{profile.displayName || handle}</div>
+        <div className = {profileStyles.profileHandle}>@{handle}</div>
+        <div className = {profileStyles.profileText}>{profile.description}</div>
+        <div className = {profileStyles.profileText}>{profile.followersCount} Followers</div>
+        <div className = {profileStyles.profileText}>{profile.followsCount} Following</div>
+        <div className = {profileStyles.profileText}>{profile.postsCount} Posts</div>
       </div>
+
+      <p></p>
       <button onClick={() => setView("grid")}>Switch to Grid View</button>
       <button onClick={() => setView("timeline")}>Switch to Timeline</button>
       <button onClick={() => navigate("/create", { replace: true })}>Create New Post</button>

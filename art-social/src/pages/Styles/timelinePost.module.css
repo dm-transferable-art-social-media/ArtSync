@@ -1,0 +1,81 @@
+.postContainer {
+    height: auto;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0 auto; /* Center the form-group horizontally */
+    margin-top: 10px; /* Add margin-top for spacing */
+    /*max-width: 800px;  Set a maximum width if needed */
+    width: 70%;
+    padding-bottom: 5%;
+    border: 1px solid gray;
+    border-radius: 25px;
+}
+
+.postTop {
+    height: 30px;
+    overflow: hidden;
+    /*justify-content: space-between;*//*Makes the space between them dynamic*/
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin: 0 auto; /* Center the form-group horizontally */
+    margin-top: 10px; /* Add margin-top for spacing */
+    /*max-width: 800px;  Set a maximum width if needed */
+    width: 100%;
+    padding-bottom: 0%;
+    /*border: 1px solid gray;*//*For seeing where postTop is bounded*/
+}
+
+.postProfilePic {
+    width: 60px;
+    height: 60px;
+    border: 5px solid white;
+    overflow: hidden;
+    position: absolute;
+    left: 15%;
+    margin-left: 10px;
+    margin-top: 10px;
+    border-radius: 50%;
+}
+
+.postDisplayName {
+    margin-top: 0px;
+    margin-right: 10px;
+    margin-left: 83px;
+    font-size: 18px;
+    font-weight: bold;
+    display: flex;
+}
+
+.postHandle {
+    margin-top: 0px;
+    margin-right: 10px;
+    font-size: 16px;
+    display: flex;
+    /*font-style: italic;*/
+    font-weight: 100;
+}
+
+.postTime {
+    margin-top: 0px;
+    font-weight: 100;
+    display: flex;
+}
+
+.postText {
+    margin-top: 5px;
+    width: 85%;
+    margin-left: 10%;
+    text-align: left;
+}
+
+.postImage img {
+    margin-top: 15px;
+    max-width: 82%;
+    max-height: 100%;
+    width: auto;
+    height: auto;
+    margin-left: 12%;
+}
