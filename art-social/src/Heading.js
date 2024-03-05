@@ -38,6 +38,11 @@ const Heading = () => {
     },
   ];
 
+  //Add other routes that don't need heading here
+  if (location.pathname == "/"){
+    return null;
+  }
+
   return (
     <div className="columns col-oneline p-2">
       <h1 className={heading.logo}>
@@ -45,8 +50,6 @@ const Heading = () => {
       </h1>
 
       <div>
-
-        {location.pathname !== "/login" && (
           <ul className={heading.tab}>
             {tabs.map(({ routeName, label }, idx) => (
               <li
@@ -65,7 +68,6 @@ const Heading = () => {
               </button>
             )}</li>
           </ul>
-        )}
       </div>
     </div>
   );

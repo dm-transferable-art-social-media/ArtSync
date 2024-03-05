@@ -51,7 +51,6 @@ const TweetUpload = () => {
 
   return (
     <div>
-      <Heading />
       <div>Upload Tweets</div>
       <input
         type="file"

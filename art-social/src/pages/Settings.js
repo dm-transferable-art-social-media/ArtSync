@@ -45,7 +45,6 @@ const Settings = () => {
 
   return (
     <div>
-      <Heading />
       <div>Settings page</div>
       <div>
       <button onClick={() => closePopup()}>Light Mode</button>

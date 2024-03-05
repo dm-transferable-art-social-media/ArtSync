@@ -14,6 +14,7 @@ import CreatePost from "./pages/components/CreatePost.js";
 import UploadData from "./pages/UploadData.js";
 
 function App() {
+
   return (
     <BrowserRouter>
     <Heading />
