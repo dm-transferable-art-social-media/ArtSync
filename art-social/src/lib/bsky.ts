@@ -231,14 +231,12 @@ export const getNotifications = async (): CursoredResponse<
   }
 
   return [data.notifications as Notification.Any[], data.cursor];
-};
-
-export const postText = async (params: {
+};export const postText = async (params: {
   text: string;
-  urls?: { url: string; indices: [number, number] }[];
+  images?: { alt: string; blob: Blob }[];
   replyTo?: FeedViewPost;
 }) => {
-  const { text, replyTo, urls = [] } = params;
+  const { text, replyTo, images = [] } = params;
   const reply = replyTo
     ? {
         parent: replyTo.post,
@@ -246,23 +244,50 @@ export const postText = async (params: {
       }
     : undefined;
 
+  const imageUploads = await Promise.all(
+    images.map(async (image) => {
+      // Determine the MIME type of the image file
+      const mimeType = image.blob.type; // This gives the MIME type of the file
+
+      // Upload each image blob and get the reference
+      const imageUpload = await agent.uploadBlob(image.blob, {
+        encoding: mimeType, // Set the encoding based on the MIME type
+      });
+      return {
+        alt: image.alt,
+        ref: imageUpload.data.blob.ref, // Get the reference to the uploaded image
+        mimeType: mimeType, // Set the MIME type based on the image type
+        size: image.blob.size
+      };
+    })
+  );
+
+  // Create the post payload with embedded images
+  const postPayload = {
+    text,
+    embed: {
+      $type: 'app.bsky.embed.images',
+      images: imageUploads.map((upload) => ({
+        alt: upload.alt,
+        image: {
+          $type: 'blob',
+          ref: upload.ref,
+          mimeType: upload.mimeType,
+          size: upload.size, // You might need to handle this based on the actual blob size
+        },
+      })),
+    },
+    createdAt: getCreatedAt(),
+    reply,
+  };
+
+  // Send the post data to the server
   return agent.api.app.bsky.feed.post.create(
     { repo: self?.did },
-    {
-      text,
-      entities: urls.map(({ url, indices }) => ({
-        type: "link",
-        index: {
-          start: indices[0],
-          end: indices[1],
-        },
-        value: url,
-      })),
-      reply,
-      createdAt: getCreatedAt(),
-    }
+    postPayload
   );
 };
+
 
 export const deletePost = async (params: { uri: string }) =>
   agent.api.app.bsky.feed.post.delete({
