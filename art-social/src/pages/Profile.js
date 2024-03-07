@@ -5,11 +5,13 @@ import {
   getAuthorFeed,
   deletePost,
   getProfile,
+  getFollowers,
 } from "../lib/bsky.ts";
 import ProfileTimeline from "./components/ProfileTimeline.js";
 import ProfileGrid from "./components/ProfileGrid";
 import profileStyles from "./styles/profileStyles.module.css";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+
 
 const Profile = () => {
   const [view, setView] = useState("grid");
@@ -76,33 +78,37 @@ const Profile = () => {
   const defaultBanner =
     "https://img.freepik.com/free-vector/stylish-hexagonal-line-pattern-background_1017-19742.jpg";
 
+
   return (
     <div>
       {/* user profile */}
       <div>
-        <div className = {profileStyles.imageContainer}>
-        <div className={profileStyles.imageBannerBox}>
-          <img
-            src={profile.banner ? profile.banner : defaultBanner}
-            className={profileStyles.imageThumbnail}
-            alt="banner"
-          ></img>
-        </div>
-        <div className={profileStyles.imageProfileBox}>
-          <img
-            src={profile.avatar ? profile.avatar : defaultAvatar}
-            className={profileStyles.imageThumbnail}
-            alt="avatar"
-          ></img>
+        <div className={profileStyles.imageContainer}>
+          <div className={profileStyles.imageBannerBox}>
+            <img
+              src={profile.banner ? profile.banner : defaultBanner}
+              className={profileStyles.imageThumbnail}
+              alt="banner"
+            ></img>
+          </div>
+          <div className={profileStyles.imageProfileBox}>
+            <img
+              src={profile.avatar ? profile.avatar : defaultAvatar}
+              className={profileStyles.imageThumbnail}
+              alt="avatar"
+            ></img>
           </div>
         </div>
 
-        <div className = {profileStyles.profileDisplayName}>{profile.displayName || handle}</div>
-        <div className = {profileStyles.profileHandle}>@{handle}</div>
-        <div className = {profileStyles.profileText}>{profile.description}</div>
-        <div className = {profileStyles.profileText}>{profile.followersCount} Followers</div>
-        <div className = {profileStyles.profileText}>{profile.followsCount} Following</div>
-        <div className = {profileStyles.profileText}>{profile.postsCount} Posts</div>
+        <div className={profileStyles.profileDisplayName}>{profile.displayName || handle}</div>
+        <div className={profileStyles.profileHandle}>@{handle}</div>
+        <div className={profileStyles.profileText}>
+          <button onClick={() => navigate("/followers", { replace: true })}> {profile.followersCount} Followers</button>
+        </div>
+        <div className={profileStyles.profileText}>
+          <button onClick={() => navigate("/follows", { replace: true })}> {profile.followsCount} Following</button>
+        </div>
+        <div className={profileStyles.profileText}>{profile.postsCount} Posts</div>
       </div>
 
       <p></p>
