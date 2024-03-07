@@ -1,51 +1,79 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from "react";
 import Heading from "../../Heading";
-import { postText } from "../../lib/bsky.ts";
-import { useLocation, useNavigate } from "react-router-dom";
+import { postText, agent } from "../../lib/bsky.ts";
+import { useNavigate } from "react-router-dom";
+import { tryResumeSession, getMyHandle } from "../../lib/bsky.ts";
 
 const CreatePost = () => {
   const [newPostText, setNewPostText] = useState(""); // State to hold the text of the new post
-  const [selectedImage, setSelectedImage] = useState(null);
-  const [showPopup, setShowPopup] = useState(false); // State to control the visibility of the popup
+  const [selectedImage, setSelectedImage] = useState(null); // State to hold the selected image file
   const [confirmationMessage, setConfirmationMessage] = useState(""); // State to hold the confirmation message
+  const [uploading, setUploading] = useState(false); // State to indicate whether an image is being uploaded
   const navigate = useNavigate();
+
   // Handler for input change
   const handleInputChange = (event) => {
     setNewPostText(event.target.value);
   };
 
-  const handleImageChange = (e) => {
-    setSelectedImage(e.target.files[0]);
+  // Handler for image file selection
+  const handleImageChange = (event) => {
+    setSelectedImage(event.target.files[0]); // Only handle the first selected file
   };
 
-  const handleUpload = () => {
-    if (selectedImage) {
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        const imageData = reader.result;
-        const blob = new Blob([imageData], { type: selectedImage.type });
-        console.log('Blob:', blob);
-        return blob;
-      };
-      reader.readAsDataURL(selectedImage);
-    }
-  };
-  // Handler for creating a new post
-  const createNewPost = async () => {
+  useEffect(() => {
+    checkAuthentication();
+  }, []);
+
+  const checkAuthentication = async () => {
     try {
-      if (newPostText !== "") {
-        await postText({ text: newPostText }); // Call the postText function to create a new post
-        setConfirmationMessage("New post created successfully!");
-        // Optionally, you can add a success message or update the state to reflect the successful creation of the post
-        console.log("New post created successfully!");
-
-      }
-      else {
-        console.log("Nuh-uh! (An empty string was entered)");
+      const { success } = await tryResumeSession();
+      if (!success) {
+        // Redirect to the login page or handle the authentication failure
+        navigate("/login");
       }
     } catch (error) {
-      console.error("Error creating new post:", error);
+      console.error("Authentication check failed:", error);
+    }
+  };
+
+  const createNewPost = async () => {
+    try {
+      if (newPostText !== "" && selectedImage) {
+        setUploading(true); // Set uploading state to true during image upload
+        const isAuthenticated = await tryResumeSession();
+        if (!isAuthenticated) {
+          // Redirect to the login page or handle the authentication failure
+          navigate("/login");
+          return;
+        }
+        const imageUpload = await agent.uploadBlob(selectedImage, {
+          encoding: "image/png",
+        });
+
+        // Check if image is uploaded successfully
+        if (imageUpload && imageUpload.success) {
+          await postText({
+            text: newPostText,
+            images: [{ alt: "Image alt text", blob: selectedImage }], // Pass the image data here
+          });
+          setConfirmationMessage("New post with image created successfully!");
+        } else {
+          console.error("Error uploading image:", imageUpload.error);
+          setConfirmationMessage("Error uploading image. Please try again.");
+        }
+
+        setUploading(false); // Reset uploading state after image upload is completed
+      } else {
+        console.log("Incomplete data for creating a post.");
+      }
+    } catch (error) {
+      console.error("Error creating new post with image:", error);
       // Handle errors or display error messages if necessary
+      setConfirmationMessage(
+        "Error creating new post with image. Please try again."
+      );
+      setUploading(false); // Reset uploading state if an error occurs
     }
   };
 
@@ -60,14 +88,17 @@ const CreatePost = () => {
           onChange={handleInputChange}
           placeholder="Enter text for the new post"
         />
-        <input 
-          type="file" 
-          accept="image/*" 
-          onChange={handleImageChange} 
+        <input
+          type="file"
+          onChange={handleImageChange}
+          accept="image/png, image/jpeg" // Allow only image files
         />
-        <br />
-        <button onClick={createNewPost}>Create Post</button>
-        <button onClick={() => navigate("/profile", { replace: true })}>Cancel</button>
+        <button onClick={createNewPost} disabled={uploading}>
+          {uploading ? "Uploading..." : "Create Post"}
+        </button>
+        <button onClick={() => navigate("/profile", { replace: true })}>
+          Cancel
+        </button>
       </div>
       {/* Confirmation message */}
       {confirmationMessage && <div>{confirmationMessage}</div>}
