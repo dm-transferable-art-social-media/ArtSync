@@ -231,8 +231,7 @@ export const getNotifications = async (): CursoredResponse<
   }
 
   return [data.notifications as Notification.Any[], data.cursor];
-};
-export const postText = async (params: {
+};export const postText = async (params: {
   text: string;
   images?: { alt: string; blob: Blob }[];
   replyTo?: FeedViewPost;
@@ -247,14 +246,17 @@ export const postText = async (params: {
 
   const imageUploads = await Promise.all(
     images.map(async (image) => {
+      // Determine the MIME type of the image file
+      const mimeType = image.blob.type; // This gives the MIME type of the file
+
       // Upload each image blob and get the reference
       const imageUpload = await agent.uploadBlob(image.blob, {
-        encoding: 'image/png', // Set the encoding based on the image type
+        encoding: mimeType, // Set the encoding based on the MIME type
       });
       return {
         alt: image.alt,
         ref: imageUpload.data.blob.ref, // Get the reference to the uploaded image
-        mimeType: 'image/png', // Set the MIME type based on the image type
+        mimeType: mimeType, // Set the MIME type based on the image type
         size: image.blob.size
       };
     })

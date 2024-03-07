@@ -47,8 +47,14 @@ const CreatePost = () => {
           navigate("/login");
           return;
         }
+
+        // Dynamically determine the encoding and MIME type based on the file type
+        const imageType = selectedImage.type.split("/")[1]; // Extract the file extension
+        const encoding = `image/${imageType}`; // Construct the encoding value
+
         const imageUpload = await agent.uploadBlob(selectedImage, {
-          encoding: "image/png",
+          encoding: encoding,
+          mimeType: selectedImage.type, // Pass the MIME type here
         });
 
         // Check if image is uploaded successfully
@@ -91,7 +97,7 @@ const CreatePost = () => {
         <input
           type="file"
           onChange={handleImageChange}
-          accept="image/png, image/jpeg" // Allow only image files
+          accept="image/png, image/jpeg, image/jpg" // Allow only image files
         />
         <button onClick={createNewPost} disabled={uploading}>
           {uploading ? "Uploading..." : "Create Post"}
