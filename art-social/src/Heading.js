@@ -36,6 +36,10 @@ const Heading = () => {
       routeName: "/upload",
       label: "Upload",
     },
+    {
+      routeName: "/followers",
+      label: "Followers",
+    },
   ];
 
   //Add other routes that don't need heading here

@@ -12,6 +12,9 @@ import Search from "./pages/Search.js";
 import Settings from "./pages/Settings.js";
 import CreatePost from "./pages/components/CreatePost.js";
 import UploadData from "./pages/UploadData.js";
+import Followers from "./pages/Followers.js";
+import Follows from "./pages/Follows.js";
+
 
 function App() {
 
@@ -29,6 +32,9 @@ function App() {
         <Route path="/settings" element={<Settings />}></Route>
         <Route path="/create" element={<CreatePost />}></Route>
         <Route path="/upload" element={<UploadData />}></Route>
+        <Route path="/followers" element={<Followers />}></Route>
+        <Route path="/follows" element={<Follows />}></Route>
+
       </Routes>
       <Footer />
     </BrowserRouter>
