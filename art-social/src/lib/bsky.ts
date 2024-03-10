@@ -231,62 +231,85 @@ export const getNotifications = async (): CursoredResponse<
   }
 
   return [data.notifications as Notification.Any[], data.cursor];
-};export const postText = async (params: {
+};
+
+export const postText = async (params: {
   text: string;
   images?: { alt: string; blob: Blob }[];
   replyTo?: FeedViewPost;
 }) => {
   const { text, replyTo, images = [] } = params;
-  const reply = replyTo
-    ? {
-        parent: replyTo.post,
-        root: replyTo.reply?.root || replyTo.post,
-      }
-    : undefined;
 
-  const imageUploads = await Promise.all(
-    images.map(async (image) => {
-      // Determine the MIME type of the image file
-      const mimeType = image.blob.type; // This gives the MIME type of the file
+  // Check if there are any images to upload
+  if (images.length === 0) {
+    // Create the post payload without embedded images
+    const postPayload = {
+      text,
+      createdAt: getCreatedAt(),
+      reply: replyTo
+        ? {
+            parent: replyTo.post,
+            root: replyTo.reply?.root || replyTo.post,
+          }
+        : undefined,
+    };
 
-      // Upload each image blob and get the reference
-      const imageUpload = await agent.uploadBlob(image.blob, {
-        encoding: mimeType, // Set the encoding based on the MIME type
-      });
-      return {
-        alt: image.alt,
-        ref: imageUpload.data.blob.ref, // Get the reference to the uploaded image
-        mimeType: mimeType, // Set the MIME type based on the image type
-        size: image.blob.size
-      };
-    })
-  );
+    // Send the post data to the server
+    return agent.api.app.bsky.feed.post.create(
+      { repo: self?.did },
+      postPayload
+    );
+  } else {
+    const imageUploads = await Promise.all(
+      images.map(async (image) => {
+        // Determine the MIME type of the image file
+        const mimeType = image.blob.type; // This gives the MIME type of the file
 
-  // Create the post payload with embedded images
-  const postPayload = {
-    text,
-    embed: {
-      $type: 'app.bsky.embed.images',
-      images: imageUploads.map((upload) => ({
-        alt: upload.alt,
-        image: {
-          $type: 'blob',
-          ref: upload.ref,
-          mimeType: upload.mimeType,
-          size: upload.size, // You might need to handle this based on the actual blob size
-        },
-      })),
-    },
-    createdAt: getCreatedAt(),
-    reply,
-  };
+        // Upload each image blob and get the reference
+        const imageUpload = await agent.uploadBlob(image.blob, {
+          encoding: mimeType, // Set the encoding based on the MIME type
+        });
+        return {
+          alt: image.alt,
+          ref: imageUpload.data.blob.ref, // Get the reference to the uploaded image
+          mimeType: mimeType, // Set the MIME type based on the image type
+          size: image.blob.size,
+        };
+      })
+    );
 
-  // Send the post data to the server
-  return agent.api.app.bsky.feed.post.create(
-    { repo: self?.did },
-    postPayload
-  );
+    // Create the post payload with embedded images
+    const postPayload = {
+      text,
+      embed: {
+        $type: "app.bsky.embed.images",
+        images: imageUploads.map((upload) => ({
+          alt: upload.alt,
+          image: {
+            $type: "blob",
+            ref: upload.ref,
+            mimeType: upload.mimeType,
+            size: upload.size, // You might need to handle this based on the actual blob size
+          },
+        })),
+      },
+      createdAt: getCreatedAt(),
+      reply: replyTo
+        ? {
+            parent: replyTo.post,
+            root: replyTo.reply?.root || replyTo.post,
+          }
+        : undefined,
+    };
+
+    // Send the post data to the server
+    return agent.api.app.bsky.feed.post.create(
+      { repo: self?.did },
+      postPayload
+    );
+  }
 };
+
 
 
 export const deletePost = async (params: { uri: string }) =>

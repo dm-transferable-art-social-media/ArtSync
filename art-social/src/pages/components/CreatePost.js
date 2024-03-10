@@ -39,8 +39,8 @@ const CreatePost = () => {
 
   const createNewPost = async () => {
     try {
-      if (newPostText !== "" && selectedImage) {
-        setUploading(true); // Set uploading state to true during image upload
+      if (newPostText !== "") {
+        setUploading(true); // Set uploading state to true during post creation
         const isAuthenticated = await tryResumeSession();
         if (!isAuthenticated) {
           // Redirect to the login page or handle the authentication failure
@@ -48,37 +48,42 @@ const CreatePost = () => {
           return;
         }
 
-        // Dynamically determine the encoding and MIME type based on the file type
-        const imageType = selectedImage.type.split("/")[1]; // Extract the file extension
-        const encoding = `image/${imageType}`; // Construct the encoding value
+        if (selectedImage) {
+          // If an image is selected, proceed with image upload
+          // Dynamically determine the encoding and MIME type based on the file type
+          const imageType = selectedImage.type.split("/")[1]; // Extract the file extension
+          const encoding = `image/${imageType}`; // Construct the encoding value
 
-        const imageUpload = await agent.uploadBlob(selectedImage, {
-          encoding: encoding,
-          mimeType: selectedImage.type, // Pass the MIME type here
-        });
-
-        // Check if image is uploaded successfully
-        if (imageUpload && imageUpload.success) {
-          await postText({
-            text: newPostText,
-            images: [{ alt: "Image alt text", blob: selectedImage }], // Pass the image data here
+          const imageUpload = await agent.uploadBlob(selectedImage, {
+            encoding: encoding,
+            mimeType: selectedImage.type, // Pass the MIME type here
           });
-          setConfirmationMessage("New post with image created successfully!");
+
+          // Check if image is uploaded successfully
+          if (imageUpload && imageUpload.success) {
+            await postText({
+              text: newPostText,
+              images: [{ alt: "Image alt text", blob: selectedImage }], // Pass the image data here
+            });
+            setConfirmationMessage("New post with image created successfully!");
+          } else {
+            console.error("Error uploading image:", imageUpload.error);
+            setConfirmationMessage("Error uploading image. Please try again.");
+          }
         } else {
-          console.error("Error uploading image:", imageUpload.error);
-          setConfirmationMessage("Error uploading image. Please try again.");
+          // If no image is selected, proceed without uploading an image
+          await postText({ text: newPostText });
+          setConfirmationMessage("New post created successfully!");
         }
 
-        setUploading(false); // Reset uploading state after image upload is completed
+        setUploading(false); // Reset uploading state after post creation
       } else {
         console.log("Incomplete data for creating a post.");
       }
     } catch (error) {
-      console.error("Error creating new post with image:", error);
+      console.error("Error creating new post:", error);
       // Handle errors or display error messages if necessary
-      setConfirmationMessage(
-        "Error creating new post with image. Please try again."
-      );
+      setConfirmationMessage("Error creating new post. Please try again.");
       setUploading(false); // Reset uploading state if an error occurs
     }
   };
