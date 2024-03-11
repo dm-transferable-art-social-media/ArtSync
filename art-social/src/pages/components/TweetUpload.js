@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Heading from "../../Heading";
 import { postText } from "../../lib/bsky.ts";
 import { useNavigate } from "react-router-dom";
+import "../styles/createPost.css";
 
 const TweetUpload = () => {
   const [tweets, setTweets] = useState([]);
@@ -50,8 +51,7 @@ const TweetUpload = () => {
   };
 
   return (
-    <div>
-      <Heading />
+    <div className="container">
       <div>Upload Tweets</div>
       <input type="file" onChange={handleFileUpload} accept=".js" />
       {uploadedFileName && <div>Uploaded file: {uploadedFileName}</div>}

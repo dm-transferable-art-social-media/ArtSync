@@ -1,0 +1,114 @@
+.container {
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .heading {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    justify-content:center;
+  }
+  .form input[type="text"] {
+    width: 100%; /* Set the width to 100% of the container */
+    padding: 10px; /* Adjust the padding */
+    margin-bottom: 10px; /* Add margin bottom for spacing */
+    border: 1px solid #ccc; /* Set border color and width */
+    border-radius: 5px; /* Add border radius for rounded corners */
+    box-sizing: border-box; /* Include padding and border in the element's total width and height */
+    font-size: 14px; /* Adjust the font size */
+  }
+  
+  /* Placeholder styling */
+  .form input[type="text"]::placeholder {
+    color: #999; /* Adjust placeholder color */
+  }
+  
+  /* Hover effect */
+  .form input[type="text"]:hover {
+    border-color: #999; /* Adjust border color on hover if needed */
+  }
+  
+  /* Focus effect */
+  .form input[type="text"]:focus {
+    outline: none; /* Remove the default focus outline */
+    border-color: #81adc8; /* Adjust border color on focus */
+  }
+/* Adjust the file input styling */
+.form input[type="file"] {
+  width: 100%;
+  padding: 5px; /* Adjust the padding */
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-sizing: border-box;
+  font-size: 14px; /* Adjust the font size */
+}
+
+
+/* Style the "Choose file" button */
+.form input[type="file"]::-webkit-file-upload-button {
+  background-color: #F7CB79; /* Button background color */
+  color: #fff; /* Button text color */
+  padding: 8px 15px; /* Button padding */
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+.choose-file {
+    background-color: #F7CB79; /* Button background color */
+    color: #fff; /* Button text color */
+    padding: 8px 15px; /* Button padding */
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+
+/* Hover effect for the "Choose file" button */
+.form input[type="file"]::-webkit-file-upload-button:hover {
+  background-color: #999; /* Darker background color on hover */
+}
+  .button-container-2 {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .primary-button,
+  .secondary-button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .primary-button {
+    background-color: #fa8b8b;
+    color: #fff;
+  }
+  
+  .primary-button:hover {
+    background-color: #999;
+  }
+  
+  .secondary-button {
+    background-color: #81adc8;
+    color: #fff;
+  }
+  
+  .secondary-button:hover {
+    background-color: #999;
+  }
+  
+  .confirmation {
+    margin-top: 10px;
+    color: #999;
+    font-weight: bold;
+  }
+  

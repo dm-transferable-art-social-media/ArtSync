@@ -1,38 +1,114 @@
-.App {
-  text-align: center;
+/* Define theme colors */
+:root {
+  --primary-color: #FA8B8B; /* Primary color */
+  --secondary-color: #81ADC8; /* Secondary color */
+  --accent-color: #F7CB79; /* Accent color */
+  --background-color: #EEE8E6; /* Background color */
+  --text-color: #000000; /* Text color */
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+/* Global styles */
+body {
+  font-family: Arial, sans-serif;
+  background-color: var(--background-color);
+  color: var(--text-color);
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+/* Header styles */
+header {
+  background-color: var(--primary-color);
+  padding: 20px;
   color: white;
 }
 
-.App-link {
-  color: #61dafb;
+.logo {
+  font-size: 24px;
+  font-weight: bold;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+/* Navigation styles */
+nav {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+nav ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+nav ul li {
+  display: inline;
+  margin-right: 20px;
+}
+
+nav ul li a {
+  color: white;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+nav ul li a:hover {
+  color: var(--accent-color);
+}
+
+/* Button styles */
+.primary-button {
+  background-color: #FA8B8B; /* Primary color */
+  color: #fff; /* Text color */
+  padding: 10px 20px; /* Adjust padding as needed */
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease; /* Smooth transition */
+
+}
+
+.primary-button:hover {
+  background-color: #e6b66e; /* Darken color on hover */
+}
+
+.secondary-button {
+  background-color: #81adc8; /* Secondary color */
+  color: #fff; /* Text color */
+  padding: 10px 20px; /* Adjust padding as needed */
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease; /* Smooth transition */
+  margin-right: 10px;
+}
+
+.secondary-button:hover {
+  background-color: #6b96b3; /* Darken color on hover */
+}
+
+/* Footer styles */
+footer {
+  background-color: var(--primary-color);
+  padding: 20px;
+  color: white;
+  text-align: center;
+}
+
+/* Sample section styles */
+.section {
+  margin-top: 20px;
+  padding: 20px;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.button-container {
+  display: flex; /* Distribute space between buttons */
+  padding: 10px 0; /* Add padding above and below the buttons */
 }

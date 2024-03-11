@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import { createSession } from "../lib/bsky.ts";
 import { useNavigate } from "react-router-dom";
 import loginStyles from "./styles/login.module.css";
 import heading from "./styles/heading.module.css";
+import "../App.css";
 
 const LoginForm = () => {
   const navigate = useNavigate();
@@ -44,47 +45,49 @@ const LoginForm = () => {
   };
 
   return (
-    <div className = {loginStyles["form-container"]}>
-    <div className="columns col-oneline p-2">
-      <h1 className={heading["logo"]}>
-        ArtSync
-      </h1>
+    <div className={loginStyles["form-container"]}>
+      <h1 className={heading["logo"]}>ArtSync</h1>
 
       <form
         className={state.hasError ? "has-error" : ""}
         onSubmit={handleSubmit}
       >
         <div className={loginStyles["form-group"]}>
-          <input
-            id="identifier"
-            value={state.identifier}
-            onChange={handleIdentifierChange}
-            className={loginStyles["form-input"]}
-            type="text"
-            placeholder="Identifier (email or handle)"
-          />
+          <div>
+            <input
+              id="identifier"
+              value={state.identifier}
+              onChange={handleIdentifierChange}
+              className={loginStyles["form-input"]}
+              type="text"
+              placeholder="Identifier (email or handle)"
+            />
+          </div>
+
+          <div>
+            <input
+              id="password"
+              value={state.password}
+              onChange={handlePasswordChange}
+              className={loginStyles["form-input"]}
+              type="password"
+              placeholder="Password"
+            />
+          </div>
+
+          {state.hasError && (
+            <p className={loginStyles["form-input-hint"]}>
+              Invalid identifier or password.
+            </p>
+          )}
+
+          <div>
+            <button type="submit" className="primary-button">
+              Sync Up
+            </button>
+          </div>
         </div>
-
-        <div className={loginStyles["form-group"]}>
-          <input
-            id="password"
-            value={state.password}
-            onChange={handlePasswordChange}
-            className={loginStyles["form-input"]}
-            type="password"
-            placeholder="Password"
-          />
-        </div>
-
-        {state.hasError && (
-          <p className={loginStyles["form-input-hint"]}>Invalid identifier or password.</p>
-        )}
-
-        <button type="submit" className={loginStyles["form-button"]}>
-          Sync Up
-        </button>
       </form>
-    </div>
     </div>
   );
 };
