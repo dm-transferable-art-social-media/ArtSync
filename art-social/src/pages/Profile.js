@@ -135,6 +135,7 @@ const Profile = () => {
             <ProfileTimeline
               posts={posts}
               handleDeletePost={handleDeletePost}
+              userHandle={handle}
             />
           )}
           {view === "grid" && (
