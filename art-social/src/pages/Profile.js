@@ -6,6 +6,7 @@ import {
   deletePost,
   getProfile,
   getFollowers,
+  getCustomFeed,
 } from "../lib/bsky.ts";
 import ProfileTimeline from "./components/ProfileTimeline.js";
 import ProfileGrid from "./components/ProfileGrid";
@@ -22,6 +23,16 @@ const Profile = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
+    getCustomFeed()
+    .then(data => {
+      // Handle the data here
+      console.log(data);
+    })
+    .catch(error => {
+      // Handle errors here
+      console.error(error);
+    });
+
     async function fetchData() {
       try {
         const [timeline] = await getAuthorFeed();
@@ -146,6 +157,7 @@ const Profile = () => {
             <ProfileTimeline
               posts={posts}
               handleDeletePost={handleDeletePost}
+              userHandle={handle}
             />
           )}
           {view === "grid" && (
