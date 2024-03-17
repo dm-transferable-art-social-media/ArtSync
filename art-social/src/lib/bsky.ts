@@ -248,9 +248,9 @@ export const postText = async (params: {
       createdAt: getCreatedAt(),
       reply: replyTo
         ? {
-            parent: replyTo.post,
-            root: replyTo.reply?.root || replyTo.post,
-          }
+          parent: replyTo.post,
+          root: replyTo.reply?.root || replyTo.post,
+        }
         : undefined,
     };
 
@@ -296,9 +296,9 @@ export const postText = async (params: {
       createdAt: getCreatedAt(),
       reply: replyTo
         ? {
-            parent: replyTo.post,
-            root: replyTo.reply?.root || replyTo.post,
-          }
+          parent: replyTo.post,
+          root: replyTo.reply?.root || replyTo.post,
+        }
         : undefined,
     };
 
@@ -479,3 +479,19 @@ export const parseUri = (uri: string) => {
     rkey: aturi.rkey,
   };
 };
+
+export const getCustomFeed = async (feedLink : string) =>
+{
+  const {success, data} = await agent.api.app.bsky.feed.getFeed({
+    // example links
+    // feed: "at://did:plc:z72i7hdynmk6r22z27h6tvur/app.bsky.feed.generator/whats-hot",
+    feed: "at://did:plc:ag6k72dxale2rghqof7dedne/app.bsky.feed.generator/aaaoxzvxrgczg",
+    // feed: feedLink,
+    limit: 22,
+  });
+  if (!success) {
+    throw new AtpError("getCustomFeed failed");
+  }
+  console.log(data);
+  return data;
+}

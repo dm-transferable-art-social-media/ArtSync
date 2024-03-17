@@ -6,6 +6,7 @@ import {
   deletePost,
   getProfile,
   getFollowers,
+  getCustomFeed,
 } from "../lib/bsky.ts";
 import ProfileTimeline from "./components/ProfileTimeline.js";
 import ProfileGrid from "./components/ProfileGrid";
@@ -23,6 +24,16 @@ const Profile = () => {
   
 
   useEffect(() => {
+    getCustomFeed()
+    .then(data => {
+      // Handle the data here
+      console.log(data);
+    })
+    .catch(error => {
+      // Handle errors here
+      console.error(error);
+    });
+
     async function fetchData() {
       try {
         const [timeline] = await getAuthorFeed();
