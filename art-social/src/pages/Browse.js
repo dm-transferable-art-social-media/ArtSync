@@ -1,5 +1,4 @@
 import { useLocation, useNavigate } from "react-router-dom";
-import { deleteSession } from "../lib/bsky.ts";
 import style from "../pages/styles/browse.module.css";
 
 const Browse = () => {
