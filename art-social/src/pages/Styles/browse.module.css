@@ -1,0 +1,54 @@
+/* .verticalNavbar a {
+    display: block;
+    width: 60px;
+  } */
+
+  .container {
+    padding: 0; /* Add padding to the left and right sides of the navbar */
+    margin-bottom: calc(100px + 10px); /* Adjust as needed */
+  }
+  
+  .tab {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    width: 200px; /* Adjust the width of the vertical navbar */
+    background-color: #8a8a8a;
+    position: fixed;
+    top: 0;
+    bottom: 0; /* Stretch the navbar to the bottom of the viewport */
+    left: 0; /* Position the navbar on the left side */
+    z-index: 100;
+  }
+  
+  .tab li {
+    display: block; /* Display the tabs as block elements */
+    margin-bottom: 10px; /* Adjust the margin between tabs */
+  }
+  
+  .tab li button {
+    display: block;
+    color: rgb(255, 255, 255);
+    background-color: #8a8a8a;
+    border: none;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    width: 100%; /* Make the buttons fill the width of the navbar */
+  }
+  
+  .tab li button:hover {
+    background-color: #111;
+  }
+  
+  .active {
+    background-color: #4CAF50;
+  }
+  
+  .logo {
+    padding-top: 1%;
+    font-family: "Segoe UI Mono";
+    text-align: center;
+  }
+  

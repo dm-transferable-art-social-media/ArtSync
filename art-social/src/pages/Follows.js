@@ -1,5 +1,3 @@
-// UploadData.js
-
 import React from 'react';
 import HandleFollows from './components/HandleFollows';
 

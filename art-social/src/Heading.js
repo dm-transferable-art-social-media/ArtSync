@@ -40,6 +40,10 @@ const Heading = () => {
       routeName: "/followers",
       label: "Followers",
     },
+    {
+      routeName: "/browse",
+      label: "Browse",
+    },
   ];
 
   //Add other routes that don't need heading here
@@ -48,11 +52,7 @@ const Heading = () => {
   }
 
   return (
-    <div className="columns col-oneline p-2">
-      <h1 className={heading.logo}>
-        ArtSync
-      </h1>
-
+    <div className={heading.container} >
       <div>
           <ul className={heading.tab}>
             {tabs.map(({ routeName, label }, idx) => (

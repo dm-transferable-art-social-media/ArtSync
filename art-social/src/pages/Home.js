@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import Heading from "../Heading";
 import timelineStyles from "./styles/timelinePost.module.css";
 import Post from "./components/Post.js";
 import {
@@ -57,12 +56,8 @@ function Home() {
     }
   };
 
-  const defaultAvatar =
-    "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png";
-
   return (
     <div>
-      <div>Home page</div>
       {loading ? (
         <p>Loading posts...</p>
       ) : (
@@ -72,7 +67,6 @@ function Home() {
               {" "}
               {/* Assuming 'cid' is unique identifier for posts */}
               <Post
-                defaultAvatar={defaultAvatar}
                 postItem={single} >
               </Post>
             </li>

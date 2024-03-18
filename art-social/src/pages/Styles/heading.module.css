@@ -1,3 +1,8 @@
+.container {
+    padding: 0; /* Add padding to the left and right sides of the navbar */
+    margin-bottom: calc(80px + 10px);
+  }
+
 .tab {
     list-style-type: none;
     margin: 0;
@@ -7,6 +12,7 @@
     background-color: #8a8a8a;
     position: fixed;
     top: 0;
+    z-index: 100;
 }
 
 .tab li {
@@ -33,7 +39,7 @@
 }
 
 .logo {
-    padding-top: 3%;
+    padding-top: 1%;
     font-family: "Segoe UI Mono";
     text-align: center;
 }

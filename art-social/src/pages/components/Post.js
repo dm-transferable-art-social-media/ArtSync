@@ -1,7 +1,10 @@
 import React from "react";
 import timelineStyles from "../styles/timelinePost.module.css";
 
-const Post = ({ defaultAvatar, postItem, handleDeletePost, userHandle }) => {
+const Post = ({ postItem, handleDeletePost, userHandle }) => {
+    const defaultAvatar =
+        "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png";
+
     const displayName = postItem.post.author.displayName;
     const authorHandle = postItem.post.author.handle;
     const authorAvatar = postItem.post.author.avatar;
@@ -11,7 +14,7 @@ const Post = ({ defaultAvatar, postItem, handleDeletePost, userHandle }) => {
     return (
         <div className={timelineStyles.postContainer}>
             <img
-                src={authorAvatar? authorAvatar : defaultAvatar}
+                src={authorAvatar ? authorAvatar : defaultAvatar}
                 className={timelineStyles.postProfilePic}
                 alt="avatar"
             ></img>
