@@ -15,7 +15,6 @@ const ProfileTimeline = ({ posts, handleDeletePost, userHandle }) => {
         {posts.map((single) => (
           <li key={single.post.cid}>
             <Post
-              defaultAvatar={defaultAvatar}
               postItem={single} 
               handleDeletePost={handleDeletePost}
               userHandle={userHandle}>

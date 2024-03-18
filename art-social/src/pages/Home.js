@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
-import Heading from "../Heading";
-import timelineStyles from "./styles/timelinePost.module.css";
 import Post from "./components/Post.js";
+import Browse from "./Browse.js";
 import {
   getMyHandle,
   tryResumeSession,
@@ -57,30 +56,28 @@ function Home() {
     }
   };
 
-  const defaultAvatar =
-    "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png";
-
   return (
     <div>
-      <div>Home page</div>
-      {loading ? (
-        <p>Loading posts...</p>
-      ) : (
-        <ul style={{ listStyleType: 'none', padding: 0, margin: 0 }}>
-          {posts.map((single) => (
-            <li key={single.post.cid}>
-              {" "}
-              {/* Assuming 'cid' is unique identifier for posts */}
-              <Post
-                defaultAvatar={defaultAvatar}
-                postItem={single} >
-              </Post>
-            </li>
-          ))}
-        </ul>
-      )
-      }
-    </div >
+        <Browse />
+      <div>
+        {loading ? (
+          <p>Loading posts...</p>
+        ) : (
+          <ul style={{ listStyleType: 'none', padding: 0, margin: 0 }}>
+            {posts.map((single) => (
+              <li key={single.post.cid}>
+                {" "}
+                {/* Assuming 'cid' is unique identifier for posts */}
+                <Post
+                  postItem={single} >
+                </Post>
+              </li>
+            ))}
+          </ul>
+        )
+        }
+      </div>
+    </div>
   );
 }
 
