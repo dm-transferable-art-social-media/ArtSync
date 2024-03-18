@@ -1,36 +1,27 @@
-/* .verticalNavbar a {
-    display: block;
-    width: 60px;
-  } */
 
-  .container {
-    padding: 0; /* Add padding to the left and right sides of the navbar */
-    margin-bottom: calc(100px + 10px); /* Adjust as needed */
-  }
-  
   .tab {
     list-style-type: none;
-    margin: 0;
+    margin-top: 40px;
+    height: 100%;
     padding: 0;
     overflow: hidden;
-    width: 200px; /* Adjust the width of the vertical navbar */
-    background-color: #8a8a8a;
+    width: max-content;
+    background-color: #b2afaf;
     position: fixed;
     top: 0;
-    bottom: 0; /* Stretch the navbar to the bottom of the viewport */
-    left: 0; /* Position the navbar on the left side */
-    z-index: 100;
+    bottom: 0;
+    left: 0;
   }
   
   .tab li {
-    display: block; /* Display the tabs as block elements */
-    margin-bottom: 10px; /* Adjust the margin between tabs */
+    display: block;
+    margin-bottom: 10px;
   }
   
   .tab li button {
     display: block;
     color: rgb(255, 255, 255);
-    background-color: #8a8a8a;
+    background-color: #b2afaf;
     border: none;
     text-align: center;
     padding: 14px 16px;

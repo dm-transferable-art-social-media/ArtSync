@@ -14,7 +14,6 @@ import CreatePost from "./pages/components/CreatePost.js";
 import UploadData from "./pages/UploadData.js";
 import Followers from "./pages/Followers.js";
 import Follows from "./pages/Follows.js";
-import Browse from "./pages/Browse.js";
 import BrowsePages from "./pages/BrowsePages.js";
 
 
@@ -36,7 +35,6 @@ function App() {
         <Route path="/upload" element={<UploadData />}></Route>
         <Route path="/followers" element={<Followers />}></Route>
         <Route path="/follows" element={<Follows />}></Route>
-        <Route path="/browse" element={<Browse />}></Route>
         <Route path="/browse/digitalart" element={<BrowsePages type={"digitalArt"} />}></Route>
         <Route path="/browse/traditionalart" element={<BrowsePages type={"traditionalArt"} />}></Route>
         <Route path="/browse/photography" element={<BrowsePages type={"photography"} />}></Route>
@@ -48,7 +46,6 @@ function App() {
         <Route path="/browse/animeart" element={<BrowsePages type={"animeArt"} />}></Route>
         <Route path="/browse/fanart" element={<BrowsePages type={"fanart"} />}></Route>
       </Routes>
-      <Footer />
     </BrowserRouter>
   );
 }

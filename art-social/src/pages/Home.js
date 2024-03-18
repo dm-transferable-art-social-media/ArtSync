@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import timelineStyles from "./styles/timelinePost.module.css";
 import Post from "./components/Post.js";
+import Browse from "./Browse.js";
 import {
   getMyHandle,
   tryResumeSession,
@@ -58,23 +58,26 @@ function Home() {
 
   return (
     <div>
-      {loading ? (
-        <p>Loading posts...</p>
-      ) : (
-        <ul style={{ listStyleType: 'none', padding: 0, margin: 0 }}>
-          {posts.map((single) => (
-            <li key={single.post.cid}>
-              {" "}
-              {/* Assuming 'cid' is unique identifier for posts */}
-              <Post
-                postItem={single} >
-              </Post>
-            </li>
-          ))}
-        </ul>
-      )
-      }
-    </div >
+        <Browse />
+      <div>
+        {loading ? (
+          <p>Loading posts...</p>
+        ) : (
+          <ul style={{ listStyleType: 'none', padding: 0, margin: 0 }}>
+            {posts.map((single) => (
+              <li key={single.post.cid}>
+                {" "}
+                {/* Assuming 'cid' is unique identifier for posts */}
+                <Post
+                  postItem={single} >
+                </Post>
+              </li>
+            ))}
+          </ul>
+        )
+        }
+      </div>
+    </div>
   );
 }
 

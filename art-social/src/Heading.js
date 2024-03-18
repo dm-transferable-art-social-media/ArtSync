@@ -40,10 +40,6 @@ const Heading = () => {
       routeName: "/followers",
       label: "Followers",
     },
-    {
-      routeName: "/browse",
-      label: "Browse",
-    },
   ];
 
   //Add other routes that don't need heading here
