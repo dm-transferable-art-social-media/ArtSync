@@ -24,14 +24,14 @@ const Profile = () => {
 
   useEffect(() => {
     getCustomFeed()
-    .then(data => {
-      // Handle the data here
-      console.log(data);
-    })
-    .catch(error => {
-      // Handle errors here
-      console.error(error);
-    });
+      .then((data) => {
+        // Handle the data here
+        console.log(data);
+      })
+      .catch((error) => {
+        // Handle errors here
+        console.error(error);
+      });
 
     async function fetchData() {
       try {
@@ -113,20 +113,34 @@ const Profile = () => {
           {profile.displayName || handle}
         </div>
         <div className={profileStyles.profileHandle}>@{handle}</div>
-        <div className={profileStyles.profileText}>
-          <button onClick={() => navigate("/followers", { replace: true })}>
-            {" "}
-            {profile.followersCount} Followers
-          </button>
-        </div>
-        <div className={profileStyles.profileText}>
-          <button onClick={() => navigate("/follows", { replace: true })}>
-            {" "}
-            {profile.followsCount} Following
-          </button>
-        </div>
-        <div className={profileStyles.profileText}>
-          {profile.postsCount} Posts
+        <div style={{ display: "flex" }}>
+          <div className={profileStyles.profileText}>
+            <button
+              className="third-button"
+              onClick={() => navigate("/followers", { replace: true })}
+            >
+              {" "}
+              {profile.followersCount} Followers
+            </button>
+          </div>
+          <div
+            style={{ marginLeft: "10px" }}
+            className={profileStyles.profileText}
+          >
+            <button
+              className="third-button"
+              onClick={() => navigate("/follows", { replace: true })}
+            >
+              {" "}
+              {profile.followsCount} Following
+            </button>
+          </div>
+          <div
+            style={{ marginLeft: "10px", paddingTop: "5px" }}
+            className={profileStyles.profileText}
+          >
+            {profile.postsCount} Posts
+          </div>
         </div>
       </div>
 

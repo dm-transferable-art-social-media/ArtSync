@@ -1,6 +1,8 @@
+import React from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { deleteSession } from "./lib/bsky.ts";
 import heading from "./pages/styles/heading.module.css";
+import logo from "../src/imgs/logo_w_trans.png";
 
 const Heading = () => {
   const location = useLocation();
@@ -13,7 +15,7 @@ const Heading = () => {
 
   const tabs = [
     {
-      routeName: "/home", // Change the routeName to include the full path
+      routeName: "/home",
       label: "Home",
     },
     {
@@ -42,32 +44,38 @@ const Heading = () => {
     },
   ];
 
-  //Add other routes that don't need heading here
-  if (location.pathname == "/"){
+  if (location.pathname === "/") {
     return null;
   }
 
   return (
-    <div className={heading.container} >
+    <div className={heading.container}>
       <div>
-          <ul className={heading.tab}>
-            {tabs.map(({ routeName, label }, idx) => (
-              <li
-                key={idx}
-                className={`tab-item ${location.pathname === routeName ? "active" : ""
-                  }`}
-              >
-                <button onClick={() => navigate(routeName, { replace: true })}>
-                  {label}
-                </button>
-              </li>
-            ))}
-            <li>{location.pathname !== "/login" && (
+        <ul className={heading.tab}>
+          <li>
+            <img src={logo} alt="Logo" className={heading.logo} />
+          </li>
+          {/* Navigation Tabs */}
+          {tabs.map(({ routeName, label }, idx) => (
+            <li
+              key={idx}
+              className={`tab-item ${
+                location.pathname === routeName ? "active" : ""
+              }`}
+            >
+              <button onClick={() => navigate(routeName, { replace: true })}>
+                {label}
+              </button>
+            </li>
+          ))}
+          <li>
+            {location.pathname !== "/login" && (
               <button className="btn btn-link col-ml-auto" onClick={logout}>
                 Logout
               </button>
-            )}</li>
-          </ul>
+            )}
+          </li>
+        </ul>
       </div>
     </div>
   );

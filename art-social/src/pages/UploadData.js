@@ -1,5 +1,3 @@
-// UploadData.js
-
 import React from 'react';
 import TweetUpload from './components/TweetUpload';
 

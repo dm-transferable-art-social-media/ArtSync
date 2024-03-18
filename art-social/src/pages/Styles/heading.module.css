@@ -37,9 +37,11 @@
     background-color: #4CAF50;
 
 }
-
 .logo {
-    padding-top: 1%;
-    font-family: "Segoe UI Mono";
-    text-align: center;
-}
+
+    width: 40px;
+    height: auto;
+    margin-right: 20px;
+    margin-top: 5px;
+    margin-left: 5px;
+  }
