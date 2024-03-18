@@ -51,6 +51,7 @@ const BrowsePages = ({ type }) => {
                     <ul style={{ listStyleType: 'none', padding: 0, margin: 0 }}>
                         {posts.map((single) => (
                             <li key={single.post.cid}>
+                                {console.log(single.post.record.text)}
                                 <Post
                                     postItem={single} >
                                 </Post>
