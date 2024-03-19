@@ -17,14 +17,15 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version: 14
-      - name: Working directory
+
+      - name: Navigate to project directory
         run: cd art-social
-        
+
       - name: Install dependencies
         run: npm install
 
-      - name: Build
-        run: npm start
+      - name: Run npm start
+        run: npm start --prefix art-social
 
       - name: Deploy to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@4.1.5
