@@ -38,10 +38,6 @@ const Heading = () => {
       routeName: "/upload",
       label: "Upload",
     },
-    {
-      routeName: "/followers",
-      label: "Followers",
-    },
   ];
 
   if (location.pathname === "/") {
