@@ -6,7 +6,7 @@
     padding: 0;
     overflow: hidden;
     width: max-content;
-    background-color: #b2afaf;
+    background-color: #81adc8;
     position: fixed;
     top: 0;
     bottom: 0;
@@ -21,7 +21,7 @@
   .tab li button {
     display: block;
     color: rgb(255, 255, 255);
-    background-color: #b2afaf;
+    background-color: #81adc8;
     border: none;
     text-align: center;
     padding: 14px 16px;
