@@ -1,0 +1,29 @@
+version: 2.1
+
+jobs:
+  build-test:
+    working_directory: ~/repo/DTASM/art-social-app
+    docker:
+      - image: cimg/node:18.10.0
+    steps:
+      - checkout
+      - setup_remote_docker:
+          docker_layer_caching: true
+      - restore_cache:
+          key: dependency-cache-
+      - run:
+          name: Install Dependencies
+          command: npm install
+      - save_cache:
+          key: dependency-cache-
+          paths:
+            - node_modules
+      - run:
+          name: Run Tests
+          command: npm run test
+
+workflows:
+  version: 2
+  build-test-deploy:
+    jobs:
+      - build-test
