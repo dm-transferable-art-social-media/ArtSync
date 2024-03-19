@@ -19,7 +19,7 @@ jobs:
           node-version: 14
 
       - name: Navigate to project directory
-        run: cd art-social/package.json
+        run: cd ArtSync/art-social/package.json
 
       - name: Install dependencies
         run: npm install
