@@ -9,6 +9,10 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
+    defaults:
+      run:
+        working-directory: ${{ github.workspace }}/art-social
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
@@ -18,14 +22,7 @@ jobs:
         with:
           node-version: 14
 
-      - name: Navigate to project directory
-        run: cd ${{ github.workspace }}/art-social
-
-      - name: Install dependencies
-        run: npm install
+      # No need to navigate to the project directory or install dependencies manually
 
       - name: Run npm start
         run: npm start
-        working-directory: ${{ github.workspace }}/art-social
-
-        
