@@ -17,10 +17,9 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version: 14
-
-      - name: Navigate to project directory
-        run: cd ArtSync/art-social/package.json
-
+      - name: Working directory
+        run: cd art-social
+        
       - name: Install dependencies
         run: npm install
 
