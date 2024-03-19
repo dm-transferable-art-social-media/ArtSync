@@ -19,10 +19,11 @@ jobs:
           node-version: 14
 
       - name: Navigate to project directory
-        run: cd art-social
+        run: cd $GITHUB_WORKSPACE/art-social
 
       - name: Install dependencies
         run: npm install
 
       - name: Run npm start
-        run: npm start --prefix art-social
+        run: npm start
+        working-directory: $GITHUB_WORKSPACE/art-social
