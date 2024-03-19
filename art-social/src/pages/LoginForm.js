@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import { createSession } from "../lib/bsky.ts";
 import { useNavigate } from "react-router-dom";
 import loginStyles from "./styles/login.module.css";
-import heading from "./styles/heading.module.css";
 import "../App.css";
+import logo from "../imgs/logo_w_trans.png";
 
 const LoginForm = () => {
   const navigate = useNavigate();
@@ -46,8 +46,7 @@ const LoginForm = () => {
 
   return (
     <div className={loginStyles["form-container"]}>
-      <h1 className={heading["logo"]}>ArtSync</h1>
-
+      <img src={logo} alt="Logo" className={loginStyles.logo} />
       <form
         className={state.hasError ? "has-error" : ""}
         onSubmit={handleSubmit}
