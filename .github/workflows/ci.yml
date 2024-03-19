@@ -27,3 +27,5 @@ jobs:
       - name: Run npm start
         run: npm start
         working-directory: ${{ github.workspace }}/art-social
+
+        
