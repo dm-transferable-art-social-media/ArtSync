@@ -18,6 +18,9 @@ jobs:
         with:
           node-version: 14
 
+      - name: Navigate to project directory
+        run: cd art-social/package.json
+
       - name: Install dependencies
         run: npm install
 
