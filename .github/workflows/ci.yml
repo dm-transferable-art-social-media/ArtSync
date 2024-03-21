@@ -27,12 +27,10 @@ jobs:
         node-version: 14
 
     - name: Install dependencies
-      run: npm install
+      run: npm ci
       working-directory: ${{ github.workspace }}/art-social
 
-    - name: Change to project directory
-      run: cd ${{ github.workspace }}/art-social
-      
     - name: Run npm start
-      run: npm start & npx wait-on http://localhost:3000 --timeout 60000
-      
+      run: |
+        npm start & npx wait-on http://localhost:3000 --timeout 60000
+        kill $(jobs -p) || true
