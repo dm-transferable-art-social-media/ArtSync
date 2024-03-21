@@ -1,6 +1,4 @@
 import React from 'react';
-import profileStyles from '../styles/profileStyles.module.css';
-import timelineStyles from "../styles/timelinePost.module.css";
 import Post from './Post';
 
 const defaultAvatar =

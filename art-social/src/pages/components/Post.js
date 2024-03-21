@@ -1,6 +1,6 @@
 import React from "react";
-import style from "../styles/timelinePost.module.css";
-import "../styles/createPost.css";
+import style from "../Styles/timelinePost.module.css";
+import "../Styles/createPost.css";
 
 const Post = ({ postItem, handleDeletePost, userHandle }) => {
   const defaultAvatar =
