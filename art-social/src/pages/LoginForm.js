@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { createSession } from "../lib/bsky.ts";
 import { useNavigate } from "react-router-dom";
-import loginStyles from "./styles/login.module.css";
+import loginStyles from "./Styles/login.module.css";
 import "../App.css";
 import logo from "../imgs/logo_w_trans.png";
 
