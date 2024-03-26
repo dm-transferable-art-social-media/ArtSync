@@ -1,0 +1,70 @@
+.form-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 90vh;
+    padding-top: 20px;
+    /* Add padding to the top */
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0 auto;
+    /* Center the form-group horizontally */
+    max-width: 400px;
+    /* Set a maximum width if needed */
+    padding: 20px;
+    /* Add padding around the form-group */
+    border: 2px solid #ccc;
+    /* Add border around the form-group */
+    border-radius: 20px;
+    /* Rounded corners for the form-group */
+    background-color: white;
+    /* Set background color to white */
+}
+
+.form-input {
+    width: 100%;
+    padding: 10px 15px;
+    /* Add padding to the input fields */
+    margin: 5px auto;
+    /* Center the input horizontally */
+    border: 2px solid #8a8a8a;
+    border-radius: 20px;
+    box-sizing: border-box;
+    /* Ensure padding and border width are included in the width */
+}
+
+.form-input-hint {
+    color: red;
+    margin-top: 5px;
+    text-align: center;
+    font-size: 14px;
+}
+
+.form-button {
+    width: 100%;
+    padding: 15px 20px;
+    margin: 10px auto;
+    /* Center the button horizontally */
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.form-button:hover {
+    background-color: #45a049;
+}
+
+.logo {
+
+    width: 10%;
+    height: auto;
+    padding-bottom: 2%;
+}
