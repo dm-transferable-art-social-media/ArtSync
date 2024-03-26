@@ -13,6 +13,7 @@ import ProfileGrid from "./components/ProfileGrid";
 import profileStyles from "./Styles/profileStyles.module.css";
 import { useNavigate } from "react-router-dom";
 import "../App.css";
+import PostExporter from "./PostExporter.js";
 
 const Profile = () => {
   const [view, setView] = useState("grid");
@@ -144,7 +145,6 @@ const Profile = () => {
           </div>
         </div>
 
-
         <p></p>
         <div className="button-container">
           <button className="secondary-button" onClick={() => setView("grid")}>
@@ -162,8 +162,8 @@ const Profile = () => {
           >
             Create New Post
           </button>
+          <PostExporter posts={posts} />
         </div>
-
 
         {loading ? (
           <p>Loading...</p>
@@ -182,9 +182,7 @@ const Profile = () => {
           </div>
         )}
       </div>
-
     </div>
-
   );
 };
 
