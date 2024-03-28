@@ -23,10 +23,6 @@ const Heading = () => {
       label: "Notifications",
     },
     {
-      routeName: "/search",
-      label: "Search",
-    },
-    {
       routeName: "/profile",
       label: "Profile",
     },
@@ -55,9 +51,8 @@ const Heading = () => {
           {tabs.map(({ routeName, label }, idx) => (
             <li
               key={idx}
-              className={`tab-item ${
-                location.pathname === routeName ? "active" : ""
-              }`}
+              className={`tab-item ${location.pathname === routeName ? "active" : ""
+                }`}
             >
               <button onClick={() => navigate(routeName, { replace: true })}>
                 {label}

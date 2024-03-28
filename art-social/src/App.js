@@ -8,7 +8,6 @@ import Profile from "./pages/Profile.js";
 import ProfileGrid from "./pages/components/ProfileGrid.js";
 import ProfileTimeline from "./pages/components/ProfileTimeline.js";
 import Notifications from "./pages/Notifications.js";
-import Search from "./pages/Search.js";
 import Settings from "./pages/Settings.js";
 import CreatePost from "./pages/components/CreatePost.js";
 import UploadData from "./pages/UploadData.js";
@@ -29,7 +28,6 @@ function App() {
         <Route path="/profile" element={<Profile />}></Route>
         <Route path="/profile/grid" element={<ProfileGrid />}></Route>
         <Route path="/profile/timeline" element={<ProfileTimeline />}></Route>
-        <Route path="/search" element={<Search />}></Route>
         <Route path="/settings" element={<Settings />}></Route>
         <Route path="/create" element={<CreatePost />}></Route>
         <Route path="/upload" element={<UploadData />}></Route>
