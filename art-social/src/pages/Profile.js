@@ -14,8 +14,10 @@ import profileStyles from "./Styles/profileStyles.module.css";
 import { useNavigate } from "react-router-dom";
 import "../App.css";
 import PostExporter from "./PostExporter.js";
+import dbHandler from "../backend/dbHandler.js";
 
 const Profile = () => {
+  const { getAllData, getDataByDocID, addData } = dbHandler({ collectionName: 'users/' });
   const [view, setView] = useState("grid");
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(true);

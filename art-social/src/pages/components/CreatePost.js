@@ -4,8 +4,10 @@ import { postText, agent } from "../../lib/bsky.ts";
 import { useNavigate } from "react-router-dom";
 import { tryResumeSession, getMyHandle } from "../../lib/bsky.ts";
 import "../Styles/createPost.css";
+import dbHandler from "../../backend/dbHandler.js";
 
 const CreatePost = () => {
+  const [handle, setHandle] = useState("");
   const [newPostText, setNewPostText] = useState("");
   const [selectedImage, setSelectedImage] = useState(null);
   const [confirmationMessage, setConfirmationMessage] = useState("");
@@ -19,9 +21,18 @@ const CreatePost = () => {
   const handleImageChange = (event) => {
     setSelectedImage(event.target.files[0]);
   };
+  async function fetchHandle() {
+    try {
+      const userHandle = await getMyHandle();
+      setHandle(userHandle);
+    } catch (error) {
+      console.error("Error fetching user handle:", error);
+    }
+  }
 
   useEffect(() => {
     checkAuthentication();
+    fetchHandle(); // Fetch user handle when component mounts
   }, []);
 
   const checkAuthentication = async () => {
@@ -46,29 +57,20 @@ const CreatePost = () => {
         }
 
         if (selectedImage) {
-          const imageType = selectedImage.type.split("/")[1];
-          const encoding = `image/${imageType}`;
-
-          const imageUpload = await agent.uploadBlob(selectedImage, {
-            encoding: encoding,
-            mimeType: selectedImage.type,
-          });
-
-          if (imageUpload && imageUpload.success) {
-            await postText({
-              text: newPostText,
-              images: [{ alt: "Image alt text", blob: selectedImage }],
-            });
-            setConfirmationMessage("New post with image created successfully!");
-          } else {
-            console.error("Error uploading image:", imageUpload.error);
-            setConfirmationMessage("Error uploading image. Please try again.");
-          }
+          // Upload image and create post with image
         } else {
+          // Create post without image
           await postText({ text: newPostText });
-          setConfirmationMessage("New post created successfully!");
+          const post = {
+            did: getMyHandle(), // Use the fetched user handle
+            text: newPostText,
+          };
+          await dbHandler({ collectionName: "posts" }).addData(
+            getMyHandle(),
+            post
+          );
         }
-
+        setConfirmationMessage("New post created successfully!");
         setUploading(false);
       } else {
         console.log("Incomplete data for creating a post.");
