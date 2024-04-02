@@ -438,6 +438,17 @@ export const like = async (params: { uri: string; cid: string }) =>
     }
   );
 
+export const unlike = async (params: {uri: string}) => {
+  agent.api.app.bsky.feed.like.delete({
+    repo: self?.did, 
+    ...parseUri(params.uri)
+  });
+};
+
+export const getLikes = async (params: {}) => {
+  // TODO
+}
+
 export const getThread = async (params: {
   uri: string;
   depth?: number;

@@ -1,6 +1,7 @@
 import React from "react";
 import style from "../Styles/timelinePost.module.css";
 import "../Styles/createPost.css";
+import PostAction from "./PostAction";
 
 const Post = ({ postItem, handleDeletePost, userHandle }) => {
   const defaultAvatar =
@@ -69,6 +70,7 @@ const Post = ({ postItem, handleDeletePost, userHandle }) => {
           )}
       </div>
       <div className={style.postText}>{renderPostContent()}</div>
+      <PostAction uri={postItem.post.uri} cid={postItem.post.cid} likeCount={postItem.post.likeCount}></PostAction>
     </div>
   );
 };
