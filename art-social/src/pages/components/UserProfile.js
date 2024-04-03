@@ -3,7 +3,8 @@ import {
   tryResumeSession,
   getAuthorFeed,
   deletePost,
-  getProfile
+  getProfile,
+  getMyHandle
 } from "../../lib/bsky.ts";
 import ProfileTimeline from "./ProfileTimeline.js";
 import ProfileGrid from "./ProfileGrid";
@@ -14,6 +15,7 @@ const UserProfile = () => {
   const [view, setView] = useState("grid");
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [userHandle, setUserHandle] = useState("");
   const {handle} = useParams();
   const [profile, setProfile] = useState("");
   const navigate = useNavigate();
@@ -23,7 +25,6 @@ const UserProfile = () => {
       try {
         const [timeline] = await getAuthorFeed({actor: handle});
         setPosts(timeline);
-        console.log(timeline);
         setLoading(false);
       } catch (error) {
         console.error("Error fetching user posts:", error);
@@ -31,11 +32,18 @@ const UserProfile = () => {
       }
     }
 
+    async function fetchHandle() {
+      try {
+        setUserHandle(await getMyHandle());
+      } catch (error) {
+        console.error("Error fetching user handle:", error);
+      }
+    }
+
     async function fetchProfile() {
       try {
         const userProfile = await getProfile({actor: handle});
         setProfile(userProfile);
-        console.log(profile);
       } catch (error) {
         console.error("Error fetching user profile:", error);
       }
@@ -45,6 +53,7 @@ const UserProfile = () => {
       await tryResumeSession();
       await fetchData();
       await fetchProfile();
+      await fetchHandle();
     }
 
     initialize();
@@ -150,7 +159,8 @@ const UserProfile = () => {
               <ProfileTimeline
                 posts={posts}
                 handleDeletePost={handleDeletePost}
-                userHandle={handle}
+                handle={handle}
+                userHandle={userHandle}
               />
             )}
             {view === "grid" && (
