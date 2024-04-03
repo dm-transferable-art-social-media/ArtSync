@@ -5,14 +5,12 @@ import {
   getAuthorFeed,
   deletePost,
   getProfile,
-  getFollowers,
-  getCustomFeed,
 } from "../lib/bsky.ts";
 import ProfileTimeline from "./components/ProfileTimeline.js";
 import ProfileGrid from "./components/ProfileGrid";
 import profileStyles from "./styles/profileStyles.module.css";
 import { useNavigate } from "react-router-dom";
-import "../App.css";
+import { defaultAvatar, defaultBanner } from "./assets/defaultImages.js";
 
 const Profile = () => {
   const [view, setView] = useState("grid");
@@ -72,11 +70,6 @@ const Profile = () => {
       console.error("Error deleting post:", error);
     }
   };
-
-  const defaultAvatar =
-    "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png";
-  const defaultBanner =
-    "https://img.freepik.com/free-vector/stylish-hexagonal-line-pattern-background_1017-19742.jpg";
 
   return (
     <div>

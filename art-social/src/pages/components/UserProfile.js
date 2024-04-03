@@ -10,6 +10,7 @@ import ProfileTimeline from "./ProfileTimeline.js";
 import ProfileGrid from "./ProfileGrid";
 import profileStyles from "../styles/profileStyles.module.css";
 import { useNavigate, useParams } from "react-router-dom";
+import { defaultAvatar, defaultBanner } from "../assets/defaultImages.js";
 
 const UserProfile = () => {
   const [view, setView] = useState("grid");
@@ -68,11 +69,6 @@ const UserProfile = () => {
       console.error("Error deleting post:", error);
     }
   };
-
-  const defaultAvatar =
-    "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png";
-  const defaultBanner =
-    "https://img.freepik.com/free-vector/stylish-hexagonal-line-pattern-background_1017-19742.jpg";
 
   return (
     <div>
