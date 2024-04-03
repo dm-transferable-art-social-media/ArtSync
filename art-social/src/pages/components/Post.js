@@ -1,11 +1,10 @@
 import React from "react";
-import style from "../Styles/timelinePost.module.css";
-import "../Styles/createPost.css";
+import style from "../styles/timelinePost.module.css";
+import "../styles/createPost.css";
+import { Link } from "react-router-dom";
+import { defaultAvatar } from "../assets/defaultImages";
 
-const Post = ({ postItem, handleDeletePost, userHandle }) => {
-  const defaultAvatar =
-    "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png";
-
+const Post = ({ postItem, handleDeletePost, handle, userHandle }) => {
   const displayName = postItem.post.author.displayName;
   const authorHandle = postItem.post.author.handle;
   const authorAvatar = postItem.post.author.avatar;
@@ -32,16 +31,20 @@ const Post = ({ postItem, handleDeletePost, userHandle }) => {
 
   return (
     <div className={style.postContainer}>
-      <img
-        src={authorAvatar ? authorAvatar : defaultAvatar}
-        className={style.postProfilePic}
-        alt="avatar"
-      ></img>
+      <Link to={"/profile/" + authorHandle}>
+        <img
+          src={authorAvatar ? authorAvatar : defaultAvatar}
+          className={style.postProfilePic}
+          alt="avatar"
+        />
+      </Link>
       <div className={style.postTop}>
-        <div className={style.postDisplayName}>
+        <Link to={"/profile/" + authorHandle} className={style.postDisplayName}>
           {displayName || authorHandle}
-        </div>
-        <div className={style.postHandle}>@{authorHandle}</div>
+        </Link>
+        <Link to={"/profile/" + authorHandle} className={style.postHandle}>
+          @{authorHandle}
+        </Link>
         <div className={style.postTime}>
           {new Date(createdAt).toLocaleDateString()}
         </div>

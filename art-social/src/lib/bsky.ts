@@ -406,6 +406,7 @@ export const getAuthorFeed = async (params?: {
   actor?: string;
 }): CursoredResponse<FeedViewPost[]> => {
   const actor = params?.actor || self?.handle;
+  // console.log("Hello? " +  params);
   if (!actor) {
     throw new AtpError();
   }

@@ -1,7 +1,7 @@
 import React from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { deleteSession } from "./lib/bsky.ts";
-import heading from "./pages/Styles/heading.module.css";
+import heading from "./pages/styles/heading.module.css";
 import logo from "../src/imgs/LogoWhite.png";
 
 const Heading = () => {

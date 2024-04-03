@@ -14,6 +14,7 @@ import UploadData from "./pages/UploadData.js";
 import Followers from "./pages/Followers.js";
 import Follows from "./pages/Follows.js";
 import BrowsePages from "./pages/BrowsePages.js";
+import UserProfile from "./pages/components/UserProfile.js";
 
 
 function App() {
@@ -43,6 +44,7 @@ function App() {
         <Route path="/browse/conceptart" element={<BrowsePages type={"conceptArt"} />}></Route>
         <Route path="/browse/animeart" element={<BrowsePages type={"animeArt"} />}></Route>
         <Route path="/browse/fanart" element={<BrowsePages type={"fanart"} />}></Route>
+        <Route path="/profile/:handle" element={<UserProfile />} />
       </Routes>
     </BrowserRouter>
   );
