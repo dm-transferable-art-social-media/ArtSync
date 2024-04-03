@@ -34,16 +34,7 @@ function App() {
         <Route path="/upload" element={<UploadData />}></Route>
         <Route path="/followers" element={<Followers />}></Route>
         <Route path="/follows" element={<Follows />}></Route>
-        <Route path="/browse/digitalart" element={<BrowsePages type={"digitalArt"} />}></Route>
-        <Route path="/browse/traditionalart" element={<BrowsePages type={"traditionalArt"} />}></Route>
-        <Route path="/browse/photography" element={<BrowsePages type={"photography"} />}></Route>
-        <Route path="/browse/sculpture" element={<BrowsePages type={"sculpture"} />}></Route>
-        <Route path="/browse/sketch" element={<BrowsePages type={"sketch"} />}></Route>
-        <Route path="/browse/painting" element={<BrowsePages type={"painting"} />}></Route>
-        <Route path="/browse/illustration" element={<BrowsePages type={"illustration"} />}></Route>
-        <Route path="/browse/conceptart" element={<BrowsePages type={"conceptArt"} />}></Route>
-        <Route path="/browse/animeart" element={<BrowsePages type={"animeArt"} />}></Route>
-        <Route path="/browse/fanart" element={<BrowsePages type={"fanart"} />}></Route>
+        <Route path="/browse/:type" element={<BrowsePages />}></Route>
         <Route path="/profile/:handle" element={<UserProfile />} />
       </Routes>
     </BrowserRouter>
