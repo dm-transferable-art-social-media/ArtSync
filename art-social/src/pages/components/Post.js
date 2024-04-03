@@ -1,6 +1,7 @@
 import React from "react";
-import style from "../Styles/timelinePost.module.css";
-import "../Styles/createPost.css";
+import style from "../styles/timelinePost.module.css";
+import "../styles/createPost.css";
+import { Link } from "react-router-dom";
 
 const Post = ({ postItem, handleDeletePost, userHandle }) => {
   const defaultAvatar =
@@ -42,6 +43,7 @@ const Post = ({ postItem, handleDeletePost, userHandle }) => {
           {displayName || authorHandle}
         </div>
         <div className={style.postHandle}>@{authorHandle}</div>
+        <Link to={"/profile/" + authorHandle}>Visit {authorHandle} Profile</Link>
         <div className={style.postTime}>
           {new Date(createdAt).toLocaleDateString()}
         </div>

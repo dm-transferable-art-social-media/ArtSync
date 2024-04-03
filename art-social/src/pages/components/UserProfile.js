@@ -1,32 +1,29 @@
 import React, { useState, useEffect } from "react";
 import {
-  getMyHandle,
   tryResumeSession,
   getAuthorFeed,
   deletePost,
-  getProfile,
-  getFollowers,
-  getCustomFeed,
-} from "../lib/bsky.ts";
-import ProfileTimeline from "./components/ProfileTimeline.js";
-import ProfileGrid from "./components/ProfileGrid";
-import profileStyles from "./styles/profileStyles.module.css";
-import { useNavigate } from "react-router-dom";
-import "../App.css";
+  getProfile
+} from "../../lib/bsky.ts";
+import ProfileTimeline from "./ProfileTimeline.js";
+import ProfileGrid from "./ProfileGrid";
+import profileStyles from "../styles/profileStyles.module.css";
+import { useNavigate, useParams } from "react-router-dom";
 
-const Profile = () => {
+const UserProfile = () => {
   const [view, setView] = useState("grid");
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [handle, setHandle] = useState("");
+  const {handle} = useParams();
   const [profile, setProfile] = useState("");
   const navigate = useNavigate();
 
   useEffect(() => {
     async function fetchData() {
       try {
-        const [timeline] = await getAuthorFeed();
+        const [timeline] = await getAuthorFeed({actor: handle});
         setPosts(timeline);
+        console.log(timeline);
         setLoading(false);
       } catch (error) {
         console.error("Error fetching user posts:", error);
@@ -34,18 +31,9 @@ const Profile = () => {
       }
     }
 
-    async function fetchHandle() {
-      try {
-        const userHandle = await getMyHandle();
-        setHandle(userHandle);
-      } catch (error) {
-        console.error("Error fetching user handle:", error);
-      }
-    }
-
     async function fetchProfile() {
       try {
-        const userProfile = await getProfile();
+        const userProfile = await getProfile({actor: handle});
         setProfile(userProfile);
         console.log(profile);
       } catch (error) {
@@ -55,13 +43,12 @@ const Profile = () => {
 
     async function initialize() {
       await tryResumeSession();
-      await fetchHandle();
       await fetchData();
       await fetchProfile();
     }
 
     initialize();
-  }, []); // Empty dependency array to run once on mount
+  }, []);
 
   const handleDeletePost = async (uri) => {
     try {
@@ -172,10 +159,14 @@ const Profile = () => {
           </div>
         )}
       </div>
-
     </div>
 
   );
+
+  // return (
+  //   <div>Hello {handle} </div>
+  // )
 };
 
-export default Profile;
+
+export default UserProfile;
