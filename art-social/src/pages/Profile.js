@@ -1,173 +1,33 @@
-import React, { useState, useEffect } from "react";
-import {
-  getMyHandle,
-  tryResumeSession,
-  getAuthorFeed,
-  deletePost,
-  getProfile,
-} from "../lib/bsky.ts";
-import ProfileTimeline from "./components/ProfileTimeline.js";
-import ProfileGrid from "./components/ProfileGrid";
-import profileStyles from "./styles/profileStyles.module.css";
+import React, {useState} from "react";
+import { getMyHandle } from "../lib/bsky.ts";
 import { useNavigate } from "react-router-dom";
-import { defaultAvatar, defaultBanner } from "./assets/defaultImages.js";
 
+// until we're able to store the handle across pages, this is the only way I can think of redirecting the user to their profile
 const Profile = () => {
-  const [view, setView] = useState("grid");
-  const [posts, setPosts] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [handle, setHandle] = useState("");
-  const [profile, setProfile] = useState("");
+  const [userHandle, setUserHandle] = useState("");
   const navigate = useNavigate();
 
-  useEffect(() => {
-    async function fetchData() {
-      try {
-        const [timeline] = await getAuthorFeed();
-        setPosts(timeline);
-        setLoading(false);
-      } catch (error) {
-        console.error("Error fetching user posts:", error);
-        setLoading(false);
-      }
-    }
+  fetchHandle();
 
-    async function fetchHandle() {
-      try {
-        const userHandle = await getMyHandle();
-        setHandle(userHandle);
-      } catch (error) {
-        console.error("Error fetching user handle:", error);
-      }
-    }
-
-    async function fetchProfile() {
-      try {
-        const userProfile = await getProfile();
-        setProfile(userProfile);
-        console.log(profile);
-      } catch (error) {
-        console.error("Error fetching user profile:", error);
-      }
-    }
-
-    async function initialize() {
-      await tryResumeSession();
-      await fetchHandle();
-      await fetchData();
-      await fetchProfile();
-    }
-
-    initialize();
-  }, []); // Empty dependency array to run once on mount
-
-  const handleDeletePost = async (uri) => {
+  async function fetchHandle() {
     try {
-      await deletePost({ uri });
-      const [timeline] = await getAuthorFeed();
-      setPosts(timeline);
+      setUserHandle(await getMyHandle());
+      navigate(`/profile/${userHandle}`);
     } catch (error) {
-      console.error("Error deleting post:", error);
+      console.error("Error fetching user handle:", error);
     }
+  }
+
+
+  const redirectToUserProfile = () => {
+    navigate(`/profile/${userHandle}`);
   };
 
   return (
     <div>
-      {/* user profile */}
-      <div className={profileStyles.imageContainer}>
-        <div className={profileStyles.imageBannerBox}>
-          <img
-            src={profile.banner ? profile.banner : defaultBanner}
-            className={profileStyles.imageThumbnail}
-            alt="banner"
-          ></img>
-        </div>
-        <div className={profileStyles.imageProfileBox}>
-          <img
-            src={profile.avatar ? profile.avatar : defaultAvatar}
-            className={profileStyles.imageThumbnail}
-            alt="avatar"
-          ></img>
-        </div>
-      </div>
-      <div className={profileStyles.infoContainer}>
-        <div>
-          <div className={profileStyles.profileDisplayName}>
-            {profile.displayName || handle}
-          </div>
-          <div className={profileStyles.profileHandle}>@{handle}</div>
-          <div style={{ display: "flex" }}>
-            <div className={profileStyles.profileText}>
-              <button
-                className="third-button"
-                onClick={() => navigate("/followers", { replace: true })}
-              >
-                {" "}
-                {profile.followersCount} Followers
-              </button>
-            </div>
-            <div
-              style={{ marginLeft: "10px" }}
-              className={profileStyles.profileText}
-            >
-              <button
-                className="third-button"
-                onClick={() => navigate("/follows", { replace: true })}
-              >
-                {" "}
-                {profile.followsCount} Following
-              </button>
-            </div>
-            <div
-              style={{ marginLeft: "10px", paddingTop: "5px" }}
-              className={profileStyles.profileText}
-            >
-              {profile.postsCount} Posts
-            </div>
-          </div>
-        </div>
-
-
-        <p></p>
-        <div className="button-container">
-          <button className="secondary-button" onClick={() => setView("grid")}>
-            Switch to Grid View
-          </button>
-          <button
-            className="secondary-button"
-            onClick={() => setView("timeline")}
-          >
-            Switch to Timeline
-          </button>
-          <button
-            className="primary-button"
-            onClick={() => navigate("/create", { replace: true })}
-          >
-            Create New Post
-          </button>
-        </div>
-
-
-        {loading ? (
-          <p>Loading...</p>
-        ) : (
-          <div>
-            {view === "timeline" && (
-              <ProfileTimeline
-                posts={posts}
-                handleDeletePost={handleDeletePost}
-                userHandle={handle}
-              />
-            )}
-            {view === "grid" && (
-              <ProfileGrid posts={posts} handleDeletePost={handleDeletePost} />
-            )}
-          </div>
-        )}
-      </div>
-
+      {/* Your Profile component content goes here */}
+      <button onClick={redirectToUserProfile}>View Profile</button>
     </div>
-
   );
 };
 
