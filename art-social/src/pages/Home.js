@@ -10,47 +10,41 @@ import {
 function Home() {
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [handle, setHandle] = useState("");
+  const [userHandle, setUserHandle] = useState("");
 
   useEffect(() => {
-    async function fetchData() {
-      try {
-        // Attempt to resume session
-        await tryResumeSession();
-
-        // Fetch user timeline
-        const [timeline] = await getTimeline({ limit: 2 + 10 })
-        setPosts(timeline);
-        console.log(timeline);
-        setLoading(false);
-      } catch (error) {
-        console.error("Error fetching user posts:", error);
-        setLoading(false);
-      }
-    }
-
     fetchData();
-  }, []);
-
-  useEffect(() => {
-    async function fetchHandle() {
-      try {
-        const userHandle = getMyHandle();
-        setHandle(userHandle);
-      } catch (error) {
-        console.error("Error fetching user handle:", error);
-      }
-    }
-
     fetchHandle();
   }, []);
+
+  async function fetchHandle() {
+    try {
+      const userHandle = getMyHandle();
+      setUserHandle(userHandle);
+    } catch (error) {
+      console.error("Error fetching user handle:", error);
+    }
+  }
+
+  async function fetchData() {
+    try {
+      // Attempt to resume session
+      await tryResumeSession();
+
+      // Fetch user timeline
+      const [timeline] = await getTimeline({ limit: 2 + 10 })
+      setPosts(timeline);
+      console.log(timeline);
+      setLoading(false);
+    } catch (error) {
+      console.error("Error fetching user posts:", error);
+      setLoading(false);
+    }
+  }
 
   const handleDeletePost = async (uri) => {
     try {
       await deletePost({ uri });
-      const [timeline] = await getTimeline({ limit: 10 });
-      setPosts(timeline);
-      console.log(posts);
     } catch (error) {
       console.error("Error deleting post:", error);
     }
@@ -58,7 +52,7 @@ function Home() {
 
   return (
     <div>
-        <Browse />
+      <Browse />
       <div>
         {loading ? (
           <p>Loading posts...</p>
@@ -69,7 +63,10 @@ function Home() {
                 {" "}
                 {/* Assuming 'cid' is unique identifier for posts */}
                 <Post
-                  postItem={single} >
+                  postItem={single}
+                  userHandle={userHandle}
+                  handleDeletePost={handleDeletePost}
+                >
                 </Post>
               </li>
             ))}

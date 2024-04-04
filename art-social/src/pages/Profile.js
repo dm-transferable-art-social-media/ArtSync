@@ -1,96 +1,38 @@
 import React, { useState, useEffect } from "react";
-import {
-  getMyHandle,
-  tryResumeSession,
-  getAuthorFeed,
-  deletePost,
-  getProfile,
-  getFollowers,
-  getCustomFeed,
-} from "../lib/bsky.ts";
-import ProfileTimeline from "./components/ProfileTimeline.js";
-import ProfileGrid from "./components/ProfileGrid";
-import profileStyles from "./Styles/profileStyles.module.css";
+import { getMyHandle } from "../lib/bsky.ts";
 import { useNavigate } from "react-router-dom";
+
 import "../App.css";
 import PostExporter from "./PostExporter.js";
 import dbHandler from "../backend/dbHandler.js";
 import FetchPostsFromDatabase from "././components/FetchPostsFromDatabase.js"
 
 const Profile = () => {
+  const [userHandle, setUserHandle] = useState("");
   const { getAllData, getDataByDocID, addData } = dbHandler({ collectionName: 'users/' });
   const [view, setView] = useState("grid");
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [handle, setHandle] = useState("");
   const [profile, setProfile] = useState("");
+
+
+
   const navigate = useNavigate();
 
   useEffect(() => {
-    getCustomFeed()
-      .then((data) => {
-        // Handle the data here
-        console.log(data);
-      })
-      .catch((error) => {
-        // Handle errors here
-        console.error(error);
-      });
-
-    async function fetchData() {
-      try {
-        const [timeline] = await getAuthorFeed();
-        setPosts(timeline);
-        setLoading(false);
-      } catch (error) {
-        console.error("Error fetching user posts:", error);
-        setLoading(false);
-      }
-    }
-
     async function fetchHandle() {
       try {
-        const userHandle = await getMyHandle();
-        setHandle(userHandle);
+        const handle = await getMyHandle();
+        setUserHandle(handle);
+        navigate(`/profile/${handle}`);
       } catch (error) {
         console.error("Error fetching user handle:", error);
       }
     }
 
-    async function fetchProfile() {
-      try {
-        const userProfile = await getProfile();
-        setProfile(userProfile);
-        console.log(profile);
-      } catch (error) {
-        console.error("Error fetching user profile:", error);
-      }
-    }
-
-    async function initialize() {
-      await tryResumeSession();
-      await fetchHandle();
-      await fetchData();
-      await fetchProfile();
-    }
-
-    initialize();
-  }, []); // Empty dependency array to run once on mount
-
-  const handleDeletePost = async (uri) => {
-    try {
-      await deletePost({ uri });
-      const [timeline] = await getAuthorFeed();
-      setPosts(timeline);
-    } catch (error) {
-      console.error("Error deleting post:", error);
-    }
-  };
-
-  const defaultAvatar =
-    "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png";
-  const defaultBanner =
-    "https://img.freepik.com/free-vector/stylish-hexagonal-line-pattern-background_1017-19742.jpg";
+    fetchHandle();
+  }, []);
 
   return (
     <div>

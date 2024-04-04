@@ -110,7 +110,6 @@ const CreatePost = () => {
 
   return (
     <div className="container">
-      <div className="heading">Create Post</div>
       <div className="form">
         <input
           type="text"
@@ -130,12 +129,6 @@ const CreatePost = () => {
             disabled={uploading}
           >
             {uploading ? "Uploading..." : "Create Post"}
-          </button>
-          <button
-            className="secondary-button"
-            onClick={() => navigate("/profile", { replace: true })}
-          >
-            Cancel
           </button>
         </div>
       </div>
