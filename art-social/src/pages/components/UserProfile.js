@@ -151,7 +151,11 @@ const UserProfile = () => {
 
             <div style={{ display: "flex" }}>
               <div className={profileStyles.profileText}>
-                <button className="third-button" onClick={toggleFollows}>
+                <button
+                  style={{ marginLeft: "10px" }}
+                  className="third-button"
+                  onClick={toggleFollows}
+                >
                   {profile.followsCount} Following
                 </button>
               </div>
