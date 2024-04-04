@@ -4,7 +4,7 @@ import "../styles/createPost.css";
 import { Link } from "react-router-dom";
 import { defaultAvatar } from "../assets/defaultImages";
 
-const Post = ({ postItem, handleDeletePost, handle, userHandle }) => {
+const Post = ({ postItem, handleDeletePost, userHandle }) => {
   const displayName = postItem.post.author.displayName;
   const authorHandle = postItem.post.author.handle;
   const authorAvatar = postItem.post.author.avatar;

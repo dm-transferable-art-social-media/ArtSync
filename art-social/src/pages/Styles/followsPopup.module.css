@@ -1,0 +1,43 @@
+.popupContainer {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    max-height: 70vh; /* Limiting the height to 70% of the viewport height */
+    overflow-y: auto; /* Enable vertical scrolling when content overflows */
+  }
+  
+  .popupHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+  
+  .popupHeader h2 {
+    margin: 0;
+  }
+  
+  .closeButton {
+    cursor: pointer;
+    font-size: 20px;
+    color: #555;
+  }
+  
+  .closeButton:hover {
+    color: #333;
+  }
+  
+  .followersList {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .followersList li {
+    margin-bottom: 5px;
+  }
+  
