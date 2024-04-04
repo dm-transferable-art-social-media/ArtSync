@@ -15,6 +15,7 @@ import { useNavigate } from "react-router-dom";
 import "../App.css";
 import PostExporter from "./PostExporter.js";
 import dbHandler from "../backend/dbHandler.js";
+import FetchPostsFromDatabase from "././components/FetchPostsFromDatabase.js"
 
 const Profile = () => {
   const { getAllData, getDataByDocID, addData } = dbHandler({ collectionName: 'users/' });
@@ -164,7 +165,7 @@ const Profile = () => {
           >
             Create New Post
           </button>
-          <PostExporter posts={posts} />
+          <FetchPostsFromDatabase />
         </div>
 
         {loading ? (

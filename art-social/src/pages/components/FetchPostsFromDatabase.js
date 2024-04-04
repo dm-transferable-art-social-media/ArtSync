@@ -57,11 +57,11 @@ const FetchPostsFromDatabase = () => {
     <div>
       {/* Button text changed to indicate file export */}
       <button
-        variant="contained"
-        color="primary"
+        style={{ marginLeft: "10px" }}
+        className="secondary-button"
         onClick={handleExportButtonClick} // Call handleExportButtonClick function when button is clicked
       >
-        Export Posts to JSON File
+        Export Posts
       </button>
     </div>
   );

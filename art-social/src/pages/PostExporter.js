@@ -1,3 +1,4 @@
+//not currently used backup to export posts to json go to FetchPostsFromDatabase to find export code
 import React from "react";
 
 const PostExporter = ({ posts }) => {

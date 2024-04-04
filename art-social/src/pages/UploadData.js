@@ -8,7 +8,6 @@ const UploadData = () => {
     <div>
       <TweetUpload />
       <PostsUpload />
-      <FetchPostsFromDatabase />
     </div>
   );
 };
