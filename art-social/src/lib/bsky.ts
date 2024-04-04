@@ -145,7 +145,7 @@ let self: { did: string; handle: string } | null = null;
 
 type CursoredResponse<T> = Promise<[data: T, cursor?: string]>;
 
-const getCreatedAt = () => new Date().toISOString();
+export const getCreatedAt = () => new Date().toISOString();
 
 export const getMyHandle = () => self?.handle || "";
 
@@ -406,6 +406,7 @@ export const getAuthorFeed = async (params?: {
   actor?: string;
 }): CursoredResponse<FeedViewPost[]> => {
   const actor = params?.actor || self?.handle;
+  // console.log("Hello? " +  params);
   if (!actor) {
     throw new AtpError();
   }
@@ -493,15 +494,11 @@ export const parseUri = (uri: string) => {
 
 export const getCustomFeed = async (link: string, maxPosts: number) => {
   const { success, data } = await agent.api.app.bsky.feed.getFeed({
-    // example links
-    // feed: "at://did:plc:z72i7hdynmk6r22z27h6tvur/app.bsky.feed.generator/whats-hot",
-    // feed: "at://did:plc:ag6k72dxale2rghqof7dedne/app.bsky.feed.generator/aaaoxzvxrgczg",
     feed: link,
     limit: maxPosts,
   });
   if (!success) {
     throw new AtpError("getCustomFeed failed");
   }
-  console.log(data.feed);
   return data.feed;
 }
