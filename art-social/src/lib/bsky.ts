@@ -145,7 +145,7 @@ let self: { did: string; handle: string } | null = null;
 
 type CursoredResponse<T> = Promise<[data: T, cursor?: string]>;
 
-const getCreatedAt = () => new Date().toISOString();
+export const getCreatedAt = () => new Date().toISOString();
 
 export const getMyHandle = () => self?.handle || "";
 
