@@ -27,10 +27,6 @@ const Heading = () => {
       label: "Profile",
     },
     {
-      routeName: "/settings",
-      label: "Settings",
-    },
-    {
       routeName: "/upload",
       label: "Upload",
     },
