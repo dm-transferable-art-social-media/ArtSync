@@ -18,13 +18,8 @@ jobs:
           restore-keys: |
             ${{ runner.OS }}-node-
 
-      - name: Set up Node.js
-        uses: actions/setup-node@v2
-        with:
-          node-version: 18
-
       - name: Install dependencies and build
-        run: npm install && npm run build
+        run: npm ci && npm run build
         working-directory: ${{ github.workspace }}/art-social
 
       - name: Deploy to Firebase Hosting
