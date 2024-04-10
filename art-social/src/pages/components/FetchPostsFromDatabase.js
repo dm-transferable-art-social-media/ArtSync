@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { navigate } from "react";
+import { useNavigate } from "react-router-dom";
 import dbHandler from "../../backend/dbHandler";
 import { getMyHandle, tryResumeSession } from "../../lib/bsky.ts"; // Import getMyHandle function
 
 const FetchPostsFromDatabase = () => {
   const [userData, setUserData] = useState(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchData = async () => {
