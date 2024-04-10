@@ -34,4 +34,4 @@ jobs:
           firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_ARTSYNC_940C4 }}'
           channelId: live
           projectId: artsync-940c4
-          entryPoint: 'art-social/firebase.json'
+          entryPoint: ${{ github.workspace }}/art-social
