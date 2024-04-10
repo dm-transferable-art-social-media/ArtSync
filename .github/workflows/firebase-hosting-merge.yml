@@ -23,14 +23,15 @@ jobs:
         with:
           node-version: 14
 
-      - name: Install dependencies
+      - name: Install dependencies and build
         run: npm install && npm run build
         working-directory: ${{ github.workspace }}/art-social
 
-      
-      - uses: FirebaseExtended/action-hosting-deploy@v0
+      - name: Deploy to Firebase Hosting
+        uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: '${{ secrets.GITHUB_TOKEN }}'
           firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_ARTSYNC_940C4 }}'
           channelId: live
           projectId: artsync-940c4
+          entryPoint: 'art-social/firebase.json'
