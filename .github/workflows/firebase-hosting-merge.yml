@@ -19,7 +19,7 @@ jobs:
             ${{ runner.OS }}-node-
 
       - name: Install dependencies and build
-        run: npm ci && npm run build
+        run: npm ci --legacy-peer-deps && npm run build
         working-directory: ${{ github.workspace }}/art-social
 
       - name: Deploy to Firebase Hosting
