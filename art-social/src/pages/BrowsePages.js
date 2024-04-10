@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { getCustomFeed } from '../lib/bsky.ts';
-import style from './styles/browse.module.css';
+import style from './Styles/browse.module.css';
 import Post from "./components/Post.js";
 import Browse from "./Browse.js";
 import { feedTypes } from "./assets/feedTypes.js";

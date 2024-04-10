@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Heading from "../../Heading";
 import { postText } from "../../lib/bsky.ts";
 import { useNavigate } from "react-router-dom";
-import "../styles/createPost.css";
+import "../Styles/createPost.css";
 
 const TweetUpload = () => {
   const [tweets, setTweets] = useState([]);
