@@ -431,24 +431,36 @@ export const repost = async (params: { uri: string; cid: string }) =>
   );
 
 export const like = async (params: { uri: string; cid: string }) =>
-  agent.api.app.bsky.feed.like.create(
+  {
+    const like = await agent.api.app.bsky.feed.like.create(
     { repo: self?.did },
     {
       subject: params,
       createdAt: getCreatedAt(),
     }
   );
-
-export const unlike = async (params: {uri: string}) => {
-  agent.api.app.bsky.feed.like.delete({
-    repo: self?.did, 
-    ...parseUri(params.uri)
-  });
-};
-
-export const getLikes = async (params: {}) => {
-  // TODO
+  return like;
 }
+
+export const unlike = async (params: {uri: string}) => 
+  agent.api.app.bsky.feed.like.delete(
+    {
+      repo: self?.did,
+    ...parseUri(params.uri)
+  }
+  );
+
+export const isLiked = async (params: {uri: string; cid: string}) => {
+  // checks if the user has liked a post
+  const {success, data} = await agent.api.app.bsky.feed.getLikes({uri: params.uri, cid: params.cid});
+  if (!success){
+    throw new AtpError("getLikes failed");
+  }
+
+  const likes = data.likes;
+  const likeFound = likes.find((x) => x.actor.handle === self?.handle);
+  return likeFound !== undefined ? true : false;
+};
 
 export const getThread = async (params: {
   uri: string;

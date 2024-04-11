@@ -1,22 +1,63 @@
-import React from "react";
+import { React, useState, useEffect } from "react";
 import { heart, heartFilled } from "../assets/Icons.js";
-import { like, unlike } from "../../lib/bsky.ts"
+import { like, unlike, isLiked } from "../../lib/bsky.ts"
 
 const PostAction = ({ uri, cid, likeCount }) => {
-    let isLiked = false;
-
+    const [likeValue, setLikeValue] = useState(false);
+    const [likeCounter, setLikeCounter] = useState(likeCount);
+    const [likeUri, setLikeUri] = useState("");
     const posturi = uri;
     const postcid = cid;
+
+    useEffect(() => {
+        //console.log('Count is now: ', likeCounter);
+    }, [likeCounter]);
+
+    useEffect(() => {
+        //console.log('Like is now: ', likeValue);
+        isLiked({ uri: uri, cid: cid }).then(result => setLikeValue(result));
+    }, [likeValue])
+
+    useEffect(() => {
+        console.log('Like Uri: ', likeUri);
+    }, [likeUri])
+
     async function handleLike() {
-        try {
-            await like({
-                uri: posturi,
-                cid: postcid
-            });
-            isLiked = true;
-            console.log("hi" + isLiked);
-        } catch (e) {
-            console.error(e);
+        const initial = await isLiked({ uri: posturi, cid: postcid });
+        if (initial) {
+            try {
+                //console.log(likeUri);
+                /*
+                if (likeUri === "") {
+                    const likeObj = await like({
+                        uri: posturi,
+                        cid: postcid
+                    });
+                    setLikeUri(likeObj.uri);
+                }*/
+                await unlike({
+                    uri: likeUri
+                })
+                setLikeValue(false);
+                setLikeCounter(likeCounter - 1);
+                setLikeUri("");
+            } catch (e) {
+                console.error(e);
+            }
+        }
+        else {
+            try {
+                const likeObj = await like({
+                    uri: posturi,
+                    cid: postcid
+                });
+                //console.log(likeObj.uri);
+                setLikeValue(true);
+                setLikeCounter(likeCounter + 1);
+                setLikeUri(likeObj.uri);
+            } catch (e) {
+                console.error(e);
+            }
         }
     }
 
@@ -27,7 +68,10 @@ const PostAction = ({ uri, cid, likeCount }) => {
 
     return (
         <div>
-            <button onClick={handleLike}>{isLiked ? likeIcons.liked : likeIcons.unliked}</button>
+            <button onClick={handleLike}>
+                {likeValue ? likeIcons.liked : likeIcons.unliked}
+                {likeCounter}
+            </button>
         </div>
     );
 };
