@@ -11,10 +11,11 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Install dependencies
-        run: npm ci && npm run build
+        run: npm ci --legacy-peer-deps && npm run build
         working-directory: ${{ github.workspace }}/art-social
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: '${{ secrets.GITHUB_TOKEN }}'
           firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_ARTSYNC_940C4 }}'
           projectId: artsync-940c4
+          entryPoint: ${{ github.workspace }}/art-social
