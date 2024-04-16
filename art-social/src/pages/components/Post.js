@@ -73,7 +73,7 @@ const Post = ({ postItem, handleDeletePost, userHandle }) => {
           )}
       </div>
       <div className={style.postText}>{renderPostContent()}</div>
-      <div><PostAction uri={postItem.post.uri} cid={postItem.post.cid} likeCount={postItem.post.likeCount}></PostAction></div>
+      <div className={style.likeContainer}><PostAction uri={postItem.post.uri} cid={postItem.post.cid} likeCount={postItem.post.likeCount}></PostAction></div>
     </div>
   );
 };

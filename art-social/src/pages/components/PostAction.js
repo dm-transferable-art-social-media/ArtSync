@@ -1,6 +1,7 @@
 import { React, useState, useEffect } from "react";
 import { heart, heartFilled } from "../assets/Icons.js";
-import { like, unlike, isLiked } from "../../lib/bsky.ts"
+import { like, unlike } from "../../lib/bsky.ts";
+import style from "../styles/postAction.module.css";
 
 const PostAction = ({ uri, cid, likeCount }) => {
     const [likeValue, setLikeValue] = useState(false);
@@ -14,8 +15,10 @@ const PostAction = ({ uri, cid, likeCount }) => {
     }, [likeCounter]);
 
     useEffect(() => {
-        //console.log('Like is now: ', likeValue);
-        isLiked({ uri: uri, cid: cid }).then(result => setLikeValue(result));
+        console.log('This is the post: ', posturi);
+        console.log('Like is now: ', likeValue);
+        /*isLiked({ uri: uri, cid: cid }).then(result => setLikeValue(result));
+        console.log('isLiked? ', likeValue);*/
     }, [likeValue])
 
     useEffect(() => {
@@ -23,8 +26,7 @@ const PostAction = ({ uri, cid, likeCount }) => {
     }, [likeUri])
 
     async function handleLike() {
-        const initial = await isLiked({ uri: posturi, cid: postcid });
-        if (initial) {
+        if (likeValue) {
             try {
                 //console.log(likeUri);
                 /*
@@ -68,9 +70,8 @@ const PostAction = ({ uri, cid, likeCount }) => {
 
     return (
         <div>
-            <button onClick={handleLike}>
-                {likeValue ? likeIcons.liked : likeIcons.unliked}
-                {likeCounter}
+            <button id={style.like} onClick={handleLike}>
+                {likeValue ? likeIcons.liked : likeIcons.unliked} {" " + likeCounter}
             </button>
         </div>
     );

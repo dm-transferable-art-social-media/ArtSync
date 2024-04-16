@@ -452,6 +452,7 @@ export const unlike = async (params: {uri: string}) =>
 
 export const isLiked = async (params: {uri: string; cid: string}) => {
   // checks if the user has liked a post
+  // doesn't work all of the time for some reason
   const {success, data} = await agent.api.app.bsky.feed.getLikes({uri: params.uri, cid: params.cid});
   if (!success){
     throw new AtpError("getLikes failed");
