@@ -1,7 +1,7 @@
 import React from 'react';
 import profileStyles from '../Styles/profileStyles.module.css';
 
-const ProfileGrid = ({ posts }) => {
+const GridView = ({ posts }) => {
   // Ensure posts is defined and not null
   if (!posts) return null;
 
@@ -31,4 +31,4 @@ const ProfileGrid = ({ posts }) => {
   );
 };
 
-export default ProfileGrid;
+export default GridView;

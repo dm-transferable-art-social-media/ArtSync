@@ -1,7 +1,7 @@
 import React from 'react';
 import Post from './Post';
 
-const ProfileTimeline = ({ posts, handleDeletePost, userHandle }) => {
+const TimelineView = ({ posts, handleDeletePost, userHandle }) => {
 
   return (
     <div>
@@ -21,4 +21,4 @@ const ProfileTimeline = ({ posts, handleDeletePost, userHandle }) => {
   );
 };
 
-export default ProfileTimeline;
+export default TimelineView;

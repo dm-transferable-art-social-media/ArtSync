@@ -10,24 +10,27 @@ import UploadData from "./pages/UploadData.js";
 import BrowsePages from "./pages/BrowsePages.js";
 import UserProfile from "./pages/components/UserProfile.js";
 import Profile from "./pages/Profile.js";
+import { ViewProvider } from "./pages/components/Context/ToggleView.js";
 
 
 function App() {
 
   return (
-    <BrowserRouter>
-      <Heading />
-      <Routes>
-        <Route path="/" element={<LoginForm />}></Route>
-        <Route path="/home" element={<Home />}></Route>
-        <Route path="/notifications" element={<Notifications />}></Route>
-        <Route path="/profile" element={<Profile />}></Route>
-        <Route path="/create" element={<CreatePost />}></Route>
-        <Route path="/upload" element={<UploadData />}></Route>
-        <Route path="/browse/:type" element={<BrowsePages />}></Route>
-        <Route path="/profile/:handle" element={<UserProfile />} />
-      </Routes>
-    </BrowserRouter>
+    <ViewProvider>
+      <BrowserRouter>
+        <Heading />
+        <Routes>
+          <Route path="/" element={<LoginForm />}></Route>
+          <Route path="/home" element={<Home />}></Route>
+          <Route path="/notifications" element={<Notifications />}></Route>
+          <Route path="/profile" element={<Profile />}></Route>
+          <Route path="/create" element={<CreatePost />}></Route>
+          <Route path="/upload" element={<UploadData />}></Route>
+          <Route path="/browse/:type" element={<BrowsePages />}></Route>
+          <Route path="/profile/:handle" element={<UserProfile />} />
+        </Routes>
+      </BrowserRouter>
+    </ViewProvider>
   );
 }
 

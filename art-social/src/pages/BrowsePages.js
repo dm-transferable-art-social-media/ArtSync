@@ -1,14 +1,19 @@
 import React, { useState, useEffect } from "react";
-import { getCustomFeed } from '../lib/bsky.ts';
+import { getCustomFeed, getAuthorFeed, deletePost, getMyHandle } from '../lib/bsky.ts';
 import style from './Styles/browse.module.css';
 import Post from "./components/Post.js";
 import Browse from "./Browse.js";
+import TimelineView from "./components/TimelineView.js";
+import GridView from "./components/GridView.js";
 import { feedTypes } from "./assets/feedTypes.js";
 import { useParams } from "react-router-dom";
+import { useView } from "./components/Context/ToggleView.js";
 
 const BrowsePages = () => {
+    const { view } = useView();
     const [posts, setPosts] = useState([]);
     const [loading, setLoading] = useState(true);
+    const [userHandle, setUserHandle] = useState("");
     const {type} = useParams();
     const uri = feedTypes[type].URI;
 
@@ -31,6 +36,24 @@ const BrowsePages = () => {
         fetchData();
     }, [uri]);
 
+    async function fetchHandle() {
+        try {
+          setUserHandle(await getMyHandle());
+        } catch (error) {
+          console.error("Error fetching user handle:", error);
+        }
+      }
+
+    const handleDeletePost = async (uri) => {
+        try {
+          await deletePost({ uri });
+          const [timeline] = await getAuthorFeed();
+          setPosts(timeline);
+        } catch (error) {
+          console.error("Error deleting post:", error);
+        }
+      };
+
     return (
         <div>
             <Browse />
@@ -38,15 +61,18 @@ const BrowsePages = () => {
                 {loading ? (
                     <p>Loading posts...</p>
                 ) : (
-                    <ul style={{ listStyleType: 'none', padding: 0, margin: 0 }}>
-                        {posts.map((single) => (
-                            <li key={single.post.cid}>
-                                <Post
-                                    postItem={single} >
-                                </Post>
-                            </li>
-                        ))}
-                    </ul>
+                    <div>
+                    {view === "Timeline" && (
+                      <TimelineView
+                        posts={posts}
+                        handleDeletePost={handleDeletePost}
+                        userHandle={userHandle}
+                      />
+                    )}
+                    {view === "Grid" && (
+                      <GridView posts={posts} handleDeletePost={handleDeletePost} />
+                    )}
+                  </div>
                 )}
             </div>
         </div>
