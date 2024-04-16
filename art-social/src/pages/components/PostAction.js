@@ -1,7 +1,7 @@
 import { React, useState, useEffect } from "react";
 import { heart, heartFilled } from "../assets/Icons.js";
 import { like, unlike } from "../../lib/bsky.ts";
-import style from "../styles/postAction.module.css";
+import style from "../Styles/postAction.module.css";
 
 const PostAction = ({ uri, cid, likeCount }) => {
     const [likeValue, setLikeValue] = useState(false);
