@@ -3,7 +3,7 @@ import Heading from "../../Heading";
 import { postText, agent } from "../../lib/bsky.ts";
 import { useNavigate } from "react-router-dom";
 import { tryResumeSession, getMyHandle, getCreatedAt } from "../../lib/bsky.ts";
-import "../styles/createPost.css";
+import "../Styles/createPost.css";
 import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import dbHandler from "../../backend/dbHandler";
 

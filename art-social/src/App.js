@@ -5,7 +5,6 @@ import Heading from "./Heading.js";
 import Footer from "./Footer.js";
 import LoginForm from "./pages/LoginForm";
 import Notifications from "./pages/Notifications.js";
-import Settings from "./pages/Settings.js";
 import CreatePost from "./pages/components/CreatePost.js";
 import UploadData from "./pages/UploadData.js";
 import BrowsePages from "./pages/BrowsePages.js";
@@ -23,7 +22,6 @@ function App() {
         <Route path="/home" element={<Home />}></Route>
         <Route path="/notifications" element={<Notifications />}></Route>
         <Route path="/profile" element={<Profile />}></Route>
-        <Route path="/settings" element={<Settings />}></Route>
         <Route path="/create" element={<CreatePost />}></Route>
         <Route path="/upload" element={<UploadData />}></Route>
         <Route path="/browse/:type" element={<BrowsePages />}></Route>

@@ -1,7 +1,7 @@
 import React from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { deleteSession } from "./lib/bsky.ts";
-import heading from "./pages/styles/heading.module.css";
+import heading from "./pages/Styles/heading.module.css";
 import logo from "../src/imgs/LogoWhite.png";
 
 const Heading = () => {
@@ -27,10 +27,6 @@ const Heading = () => {
       label: "Profile",
     },
     {
-      routeName: "/settings",
-      label: "Settings",
-    },
-    {
       routeName: "/upload",
       label: "Upload",
     },
@@ -51,8 +47,9 @@ const Heading = () => {
           {tabs.map(({ routeName, label }, idx) => (
             <li
               key={idx}
-              className={`tab-item ${location.pathname === routeName ? "active" : ""
-                }`}
+              className={`tab-item ${
+                location.pathname === routeName ? "active" : ""
+              }`}
             >
               <button onClick={() => navigate(routeName, { replace: true })}>
                 {label}

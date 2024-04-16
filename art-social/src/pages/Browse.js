@@ -1,5 +1,5 @@
 import { useLocation, useNavigate } from "react-router-dom";
-import style from "../pages/styles/browse.module.css";
+import style from "../pages/Styles/browse.module.css";
 import { feedTypes } from "./assets/feedTypes";
 
 const Browse = () => {

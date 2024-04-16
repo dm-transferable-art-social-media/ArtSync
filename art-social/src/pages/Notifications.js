@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { getNotifications } from "../lib/bsky.ts";
 import { personPlusFilled, chatFilled, repost, heartFilled } from "./assets/Icons.js";
-import style from "./styles/notifications.module.css";
+import style from "./Styles/notifications.module.css";
 
 const Notifications = () => {
   const [notifications, setNotifications] = useState([]);

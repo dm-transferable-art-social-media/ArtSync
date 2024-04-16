@@ -11,8 +11,8 @@ import {
 } from "../../lib/bsky.ts";
 import ProfileTimeline from "./ProfileTimeline.js";
 import ProfileGrid from "./ProfileGrid";
-import profileStyles from "../styles/profileStyles.module.css";
-import followsStyles from "../styles/followsPopup.module.css";
+import profileStyles from "../Styles/profileStyles.module.css";
+import followsStyles from "../Styles/followsPopup.module.css";
 import CreatePost from "./CreatePost.js";
 import { defaultAvatar, defaultBanner } from "../assets/defaultImages.js";
 import Follows from "./Follows.js";
