@@ -92,3 +92,8 @@
     border-radius: 8px;
     padding: 4px;
 }
+
+.likeContainer {
+    align-self: self-start;
+    margin-left: 12%;
+}

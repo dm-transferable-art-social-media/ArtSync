@@ -3,6 +3,7 @@ import style from "../Styles/timelinePost.module.css";
 import "../Styles/createPost.css";
 import { Link } from "react-router-dom";
 import { defaultAvatar } from "../assets/defaultImages";
+import PostAction from "./PostAction.js";
 
 const Post = ({ postItem, handleDeletePost, userHandle }) => {
   const displayName = postItem.post.author.displayName;
@@ -72,6 +73,7 @@ const Post = ({ postItem, handleDeletePost, userHandle }) => {
           )}
       </div>
       <div className={style.postText}>{renderPostContent()}</div>
+      <div className={style.likeContainer}><PostAction uri={postItem.post.uri} cid={postItem.post.cid} likeCount={postItem.post.likeCount}></PostAction></div>
     </div>
   );
 };
