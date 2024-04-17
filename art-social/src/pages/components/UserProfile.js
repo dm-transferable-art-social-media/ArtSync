@@ -1,26 +1,22 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import {
   tryResumeSession,
   getAuthorFeed,
-  deletePost,
   getProfile,
   getMyHandle,
   getFollowers,
   getFollows,
 } from "../../lib/bsky.ts";
-import TimelineView from "./TimelineView.js";
-import GridView from "./GridView.js";
 import profileStyles from "../Styles/profileStyles.module.css";
 import followsStyles from "../Styles/followsPopup.module.css";
 import CreatePost from "./CreatePost.js";
 import { defaultAvatar, defaultBanner } from "../assets/defaultImages.js";
 import Follows from "./Follows.js";
 import FetchPostsFromDatabase from "./FetchPostsFromDatabase.js";
-import { useView } from "./Context/ToggleView.js";
+import Feed from "./Feed.js";
 
 const UserProfile = () => {
-  const { view } = useView();
   const { handle } = useParams();
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -31,8 +27,6 @@ const UserProfile = () => {
   const [showFollows, setShowFollows] = useState(false);
   const [showFollowers, setShowFollowers] = useState(false);
   const [showUpload, setShowUpload] = useState(false);
-
-  const navigate = useNavigate();
 
   useEffect(() => {
     async function fetchData() {
@@ -90,16 +84,6 @@ const UserProfile = () => {
 
     initialize();
   }, []);
-
-  const handleDeletePost = async (uri) => {
-    try {
-      await deletePost({ uri });
-      const [timeline] = await getAuthorFeed();
-      setPosts(timeline);
-    } catch (error) {
-      console.error("Error deleting post:", error);
-    }
-  };
 
   const toggleFollows = () => {
     setShowFollows(!showFollows);
@@ -173,19 +157,7 @@ const UserProfile = () => {
         {loading ? (
           <p>Loading...</p>
         ) : (
-          <span>
-            {view === "Timeline" && (
-              <TimelineView
-                posts={posts}
-                handleDeletePost={handleDeletePost}
-                handle={handle}
-                userHandle={userHandle}
-              />
-            )}
-            {view === "Grid" && (
-              <GridView posts={posts} handleDeletePost={handleDeletePost} />
-            )}
-          </span>
+         <Feed posts={posts} userHandle={userHandle}></Feed>
         )}
       </div>
       {showFollows && (

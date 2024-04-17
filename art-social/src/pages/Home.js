@@ -1,18 +1,13 @@
 import React, { useState, useEffect } from "react";
-import Post from "./components/Post.js";
 import Browse from "./Browse.js";
 import {
   getMyHandle,
   tryResumeSession,
   getTimeline,
-  deletePost,
 } from "../lib/bsky.ts";
-import TimelineView from "./components/TimelineView.js";
-import GridView from "./components/GridView.js";
-import { useView } from "./components/Context/ToggleView.js";
+import Feed from "./components/Feed.js";
 
 function Home() {
-  const { view } = useView();
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [userHandle, setUserHandle] = useState("");
@@ -39,7 +34,6 @@ function Home() {
       // Fetch user timeline
       const [timeline] = await getTimeline({ limit: 2 + 10 })
       setPosts(timeline);
-      console.log(timeline);
       setLoading(false);
     } catch (error) {
       console.error("Error fetching user posts:", error);
@@ -47,35 +41,16 @@ function Home() {
     }
   }
 
-  const handleDeletePost = async (uri) => {
-    try {
-      await deletePost({ uri });
-    } catch (error) {
-      console.error("Error deleting post:", error);
-    }
-  };
-
   return (
-    <div style={{ display: "flex" }}> {/* Container for Browse and Timeline/GridView */}
-      <div style={{ flex: 1 }}> {/* Container for Browse */}
+    <div style={{ display: "flex" }}>
+      <div style={{ flex: 1 }}>
         <Browse />
       </div>
-      <div style={{ flex: 10 }}> {/* Container for Timeline/GridView */}
+      <div style={{ flex: 10 }}>
         {loading ? (
           <p>Loading posts...</p>
         ) : (
-          <div>
-            {view === "Timeline" && (
-              <TimelineView
-                posts={posts}
-                handleDeletePost={handleDeletePost}
-                userHandle={userHandle}
-              />
-            )}
-            {view === "Grid" && (
-              <GridView posts={posts} handleDeletePost={handleDeletePost} />
-            )}
-          </div>
+          <Feed posts={posts} userHandle={userHandle}></Feed>
         )}
       </div>
     </div>

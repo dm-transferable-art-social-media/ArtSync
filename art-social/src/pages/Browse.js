@@ -1,4 +1,4 @@
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import style from "../pages/Styles/browse.module.css";
 import { feedTypes } from "./assets/feedTypes";
 
