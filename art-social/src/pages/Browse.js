@@ -6,9 +6,9 @@ const Browse = () => {
     const navigate = useNavigate();
 
     return (
-        <div>
+        <div style={{width: "min-content", display: "inline-block"}}>
             <ul className={style.tab}>
-                {Object.entries(feedTypes).map(([type, {title}]) => ( 
+                {Object.entries(feedTypes).map(([type, { title }]) => (
                     <li>
                         <button onClick={() => navigate("/browse/" + type, { replace: true })}>
                             {title}

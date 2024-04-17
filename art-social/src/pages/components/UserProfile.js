@@ -173,7 +173,7 @@ const UserProfile = () => {
         {loading ? (
           <p>Loading...</p>
         ) : (
-          <div>
+          <span>
             {view === "Timeline" && (
               <TimelineView
                 posts={posts}
@@ -185,7 +185,7 @@ const UserProfile = () => {
             {view === "Grid" && (
               <GridView posts={posts} handleDeletePost={handleDeletePost} />
             )}
-          </div>
+          </span>
         )}
       </div>
       {showFollows && (

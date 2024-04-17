@@ -2,15 +2,13 @@
     height: auto;
     overflow: hidden;
     display: flex;
-    flex-direction: column;
-    align-items: center;
+    align-items: flex-start;
     margin: 0 auto;
     /* Center the form-group horizontally */
     margin-top: 10px;
     /* Add margin-top for spacing */
     /*max-width: 800px;  Set a maximum width if needed */
     width: 70%;
-    padding-left: 2%;
     padding-top: 1%;
     padding-bottom: 4%;
     border: 1px solid gray;
@@ -40,9 +38,9 @@
     height: 60px;
     border: 5px solid white;
     overflow: hidden;
-    position: absolute;
-    left: 15%;
-    margin-left: 10px;
+    /* position: absolute;
+    left: 15%; */
+    display: inline-block;
     margin-top: 10px;
     border-radius: 50%;
 }
@@ -50,7 +48,7 @@
 .postDisplayName {
     margin-top: 0px;
     margin-right: 10px;
-    margin-left: 83px;
+    /* margin-left: 10%; */
     font-size: 18px;
     font-weight: bold;
     display: flex;
@@ -74,7 +72,7 @@
 .postText {
     margin-top: 5px;
     width: 85%;
-    margin-left: 10%;
+    /* margin-left: 10%; */
     text-align: left;
 }
 
@@ -84,7 +82,7 @@
     max-height: 100%;
     width: auto;
     height: auto;
-    margin-left: 12%;
+    /* margin-left: 10%; */
 }
 
 .hashtag {
@@ -95,5 +93,5 @@
 
 .likeContainer {
     align-self: self-start;
-    margin-left: 12%;
+    /* margin-left: 10%; */
 }

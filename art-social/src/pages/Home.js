@@ -11,7 +11,6 @@ import TimelineView from "./components/TimelineView.js";
 import GridView from "./components/GridView.js";
 import { useView } from "./components/Context/ToggleView.js";
 
-
 function Home() {
   const { view } = useView();
   const [posts, setPosts] = useState([]);
@@ -57,9 +56,11 @@ function Home() {
   };
 
   return (
-    <div>
-      <Browse />
-      <div>
+    <div style={{ display: "flex" }}> {/* Container for Browse and Timeline/GridView */}
+      <div style={{ flex: 1 }}> {/* Container for Browse */}
+        <Browse />
+      </div>
+      <div style={{ flex: 10 }}> {/* Container for Timeline/GridView */}
         {loading ? (
           <p>Loading posts...</p>
         ) : (
@@ -75,8 +76,7 @@ function Home() {
               <GridView posts={posts} handleDeletePost={handleDeletePost} />
             )}
           </div>
-        )
-        }
+        )}
       </div>
     </div>
   );
