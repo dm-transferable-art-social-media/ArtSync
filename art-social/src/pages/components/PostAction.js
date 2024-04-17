@@ -14,16 +14,16 @@ const PostAction = ({ uri, cid, likeCount }) => {
         //console.log('Count is now: ', likeCounter);
     }, [likeCounter]);
 
-    useEffect(() => {
-        console.log('This is the post: ', posturi);
-        console.log('Like is now: ', likeValue);
-        /*isLiked({ uri: uri, cid: cid }).then(result => setLikeValue(result));
-        console.log('isLiked? ', likeValue);*/
-    }, [likeValue])
+    // useEffect(() => {
+    //     console.log('This is the post: ', posturi);
+    //     console.log('Like is now: ', likeValue);
+    //     /*isLiked({ uri: uri, cid: cid }).then(result => setLikeValue(result));
+    //     console.log('isLiked? ', likeValue);*/
+    // }, [likeValue])
 
-    useEffect(() => {
-        console.log('Like Uri: ', likeUri);
-    }, [likeUri])
+    // useEffect(() => {
+    //     console.log('Like Uri: ', likeUri);
+    // }, [likeUri])
 
     async function handleLike() {
         if (likeValue) {
