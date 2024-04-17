@@ -3,10 +3,12 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { deleteSession } from "./lib/bsky.ts";
 import heading from "./pages/Styles/heading.module.css";
 import logo from "../src/imgs/LogoWhite.png";
+import { useView } from "./pages/components/Context/ToggleView.js";
 
 const Heading = () => {
   const location = useLocation();
   const navigate = useNavigate();
+  const { view, toggleView } = useView();
 
   const logout = () => {
     deleteSession();
@@ -47,15 +49,19 @@ const Heading = () => {
           {tabs.map(({ routeName, label }, idx) => (
             <li
               key={idx}
-              className={`tab-item ${
-                location.pathname === routeName ? "active" : ""
-              }`}
+              className={`tab-item ${location.pathname === routeName ? "active" : ""
+                }`}
             >
               <button onClick={() => navigate(routeName, { replace: true })}>
                 {label}
               </button>
             </li>
           ))}
+          <li>
+            <button onClick={toggleView}>
+              {view} View
+            </button>
+          </li>
           <li>
             {location.pathname !== "/login" && (
               <button className="btn btn-link col-ml-auto" onClick={logout}>

@@ -1,11 +1,9 @@
 import React from 'react';
 import Post from './Post';
 
-const ProfileTimeline = ({ posts, handleDeletePost, userHandle }) => {
+const TimelineView = ({ posts, handleDeletePost, userHandle }) => {
 
   return (
-    <div>
-      <h1>User Timeline</h1>
       <ul style={{ listStyleType: 'none', padding: 0, margin: 0 }}>
         {posts.map((single) => (
           <li key={single.post.cid}>
@@ -17,8 +15,7 @@ const ProfileTimeline = ({ posts, handleDeletePost, userHandle }) => {
           </li>
         ))}
       </ul>
-    </div>
   );
 };
 
-export default ProfileTimeline;
+export default TimelineView;

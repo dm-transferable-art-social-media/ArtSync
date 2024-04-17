@@ -7,7 +7,7 @@
 .imageContainer {
     height: 200px;
     overflow: hidden;
-    display: flex;
+    display: inline-block;
     flex-direction: column;
     align-items: center;
     margin: 0 auto;
@@ -52,6 +52,7 @@
 
 .gridContainer {
     display: grid;
+    list-style-type: none;
     grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
     gap: 2px;
 }

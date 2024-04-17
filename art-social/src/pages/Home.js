@@ -7,7 +7,12 @@ import {
   getTimeline,
   deletePost,
 } from "../lib/bsky.ts";
+import TimelineView from "./components/TimelineView.js";
+import GridView from "./components/GridView.js";
+import { useView } from "./components/Context/ToggleView.js";
+
 function Home() {
+  const { view } = useView();
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [userHandle, setUserHandle] = useState("");
@@ -51,28 +56,27 @@ function Home() {
   };
 
   return (
-    <div>
-      <Browse />
-      <div>
+    <div style={{ display: "flex" }}> {/* Container for Browse and Timeline/GridView */}
+      <div style={{ flex: 1 }}> {/* Container for Browse */}
+        <Browse />
+      </div>
+      <div style={{ flex: 10 }}> {/* Container for Timeline/GridView */}
         {loading ? (
           <p>Loading posts...</p>
         ) : (
-          <ul style={{ listStyleType: 'none', padding: 0, margin: 0 }}>
-            {posts.map((single) => (
-              <li key={single.post.cid}>
-                {" "}
-                {/* Assuming 'cid' is unique identifier for posts */}
-                <Post
-                  postItem={single}
-                  userHandle={userHandle}
-                  handleDeletePost={handleDeletePost}
-                >
-                </Post>
-              </li>
-            ))}
-          </ul>
-        )
-        }
+          <div>
+            {view === "Timeline" && (
+              <TimelineView
+                posts={posts}
+                handleDeletePost={handleDeletePost}
+                userHandle={userHandle}
+              />
+            )}
+            {view === "Grid" && (
+              <GridView posts={posts} handleDeletePost={handleDeletePost} />
+            )}
+          </div>
+        )}
       </div>
     </div>
   );

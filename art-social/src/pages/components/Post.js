@@ -32,48 +32,52 @@ const Post = ({ postItem, handleDeletePost, userHandle }) => {
 
   return (
     <div className={style.postContainer}>
-      <Link to={"/profile/" + authorHandle}>
-        <img
-          src={authorAvatar ? authorAvatar : defaultAvatar}
-          className={style.postProfilePic}
-          alt="avatar"
-        />
-      </Link>
-      <div className={style.postTop}>
-        <Link to={"/profile/" + authorHandle} className={style.postDisplayName}>
-          {displayName || authorHandle}
+      <div style={{ flex: 1, padding: "0 5% 0 5%" }}>
+        <Link to={"/profile/" + authorHandle}>
+          <img
+            src={authorAvatar ? authorAvatar : defaultAvatar}
+            className={style.postProfilePic}
+            alt="avatar"
+          />
         </Link>
-        <Link to={"/profile/" + authorHandle} className={style.postHandle}>
-          @{authorHandle}
-        </Link>
-        <div className={style.postTime}>
-          {new Date(createdAt).toLocaleDateString()}
-        </div>
-        {postItem.post.author.handle === userHandle && (
-          <div>
-            <button
-              style={{ borderRadius: "10px", marginLeft: "10px" }}
-              className="primary-button"
-              onClick={() => handleDeletePost(postItem.post.uri)}
-            >
-              Delete
-            </button>
+      </div>
+      <div style={{flex: 15 }}>
+        <div className={style.postTop}>
+          <Link to={"/profile/" + authorHandle} className={style.postDisplayName}>
+            {displayName || authorHandle}
+          </Link>
+          <Link to={"/profile/" + authorHandle} className={style.postHandle}>
+            @{authorHandle}
+          </Link>
+          <div className={style.postTime}>
+            {new Date(createdAt).toLocaleDateString()}
           </div>
-        )}
-      </div>
-      <div className={style.postImage}>
-        {postItem.post.embed &&
-          postItem.post.embed.images &&
-          postItem.post.embed.images[0] && (
-            <img
-              src={postItem.post.embed.images[0].fullsize}
-              alt="avatar"
-              className={style.postImage}
-            />
+          {postItem.post.author.handle === userHandle && (
+            <div>
+              <button
+                style={{ borderRadius: "10px", marginLeft: "10px" }}
+                className="primary-button"
+                onClick={() => handleDeletePost(postItem.post.uri)}
+              >
+                Delete
+              </button>
+            </div>
           )}
+        </div>
+        <div className={style.postImage}>
+          {postItem.post.embed &&
+            postItem.post.embed.images &&
+            postItem.post.embed.images[0] && (
+              <img
+                src={postItem.post.embed.images[0].fullsize}
+                alt="image"
+                className={style.postImage}
+              />
+            )}
+        </div>
+        <div className={style.postText}>{renderPostContent()}</div>
+        <div className={style.likeContainer}><PostAction uri={postItem.post.uri} cid={postItem.post.cid} likeCount={postItem.post.likeCount}></PostAction></div>
       </div>
-      <div className={style.postText}>{renderPostContent()}</div>
-      <div className={style.likeContainer}><PostAction uri={postItem.post.uri} cid={postItem.post.cid} likeCount={postItem.post.likeCount}></PostAction></div>
     </div>
   );
 };

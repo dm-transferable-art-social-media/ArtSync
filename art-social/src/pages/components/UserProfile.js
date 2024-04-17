@@ -9,17 +9,18 @@ import {
   getFollowers,
   getFollows,
 } from "../../lib/bsky.ts";
-import ProfileTimeline from "./ProfileTimeline.js";
-import ProfileGrid from "./ProfileGrid";
+import TimelineView from "./TimelineView.js";
+import GridView from "./GridView.js";
 import profileStyles from "../Styles/profileStyles.module.css";
 import followsStyles from "../Styles/followsPopup.module.css";
 import CreatePost from "./CreatePost.js";
 import { defaultAvatar, defaultBanner } from "../assets/defaultImages.js";
 import Follows from "./Follows.js";
 import FetchPostsFromDatabase from "./FetchPostsFromDatabase.js";
+import { useView } from "./Context/ToggleView.js";
 
 const UserProfile = () => {
-  const [view, setView] = useState("grid");
+  const { view } = useView();
   const { handle } = useParams();
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -100,10 +101,6 @@ const UserProfile = () => {
     }
   };
 
-  const handleSwitchView = (viewType) => {
-    setView(viewType);
-  };
-
   const toggleFollows = () => {
     setShowFollows(!showFollows);
   };
@@ -171,41 +168,24 @@ const UserProfile = () => {
         </div>
         <p></p>
         <div className="button-container">
-          <button
-            className="secondary-button"
-            onClick={() => handleSwitchView("grid")}
-          >
-            Switch to Grid View
-          </button>
-          <button
-            className="secondary-button"
-            onClick={() => handleSwitchView("timeline")}
-          >
-            Switch to Timeline
-          </button>
-
-          <button className="primary-button" onClick={toggleUpload}>
-            Create New Post
-          </button>
-
           <FetchPostsFromDatabase />
         </div>
         {loading ? (
           <p>Loading...</p>
         ) : (
-          <div>
-            {view === "timeline" && (
-              <ProfileTimeline
+          <span>
+            {view === "Timeline" && (
+              <TimelineView
                 posts={posts}
                 handleDeletePost={handleDeletePost}
                 handle={handle}
                 userHandle={userHandle}
               />
             )}
-            {view === "grid" && (
-              <ProfileGrid posts={posts} handleDeletePost={handleDeletePost} />
+            {view === "Grid" && (
+              <GridView posts={posts} handleDeletePost={handleDeletePost} />
             )}
-          </div>
+          </span>
         )}
       </div>
       {showFollows && (
