@@ -12,6 +12,8 @@ const BrowsePages = () => {
     const { type } = useParams();
     const uri = feedTypes[type].URI;
 
+    console.log(uri);
+
     useEffect(() => {
         async function fetchData() {
             try {
@@ -28,6 +30,7 @@ const BrowsePages = () => {
                 setLoading(false);
             }
         }
+        console.log("Gfdss");
         fetchData();
         fetchHandle();
     }, [uri]);

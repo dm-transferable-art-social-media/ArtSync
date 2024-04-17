@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import TimelineView from './TimelineView';
 import GridView from './GridView';
 import { useView } from './Context/ToggleView';
@@ -7,6 +7,10 @@ import { deletePost } from '../../lib/bsky.ts';
 const Feed = ({ posts, userHandle }) => {
   const { view } = useView();
   const [updatedPosts, setUpdatedPosts] = useState(posts);
+
+  useEffect(() => {
+    setUpdatedPosts(posts);
+  }, [posts]);
 
   const handleDeletePost = async (uri) => {
     try {
