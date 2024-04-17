@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { getCustomFeed, getMyHandle } from '../lib/bsky.ts';
-import Browse from "./Browse.js";
 import { feedTypes } from "./assets/feedTypes.js";
 import { useParams } from "react-router-dom";
 import Feed from "./components/Feed.js";
@@ -44,18 +43,12 @@ const BrowsePages = () => {
     }
 
     return (
-        <div style={{ display: "flex" }}>
-            <div style={{ flex: 1 }}>
-            <Browse />
-            </div>
-            
-            <div style={{ flex: 10 }}>
-                {loading ? (
-                    <p>Loading posts...</p>
-                ) : (
-                    <Feed posts={posts} userHandle={userHandle}></Feed>
-                )}
-            </div>
+        <div>
+            {loading ? (
+                <p>Loading posts...</p>
+            ) : (
+                <Feed posts={posts} userHandle={userHandle}></Feed>
+            )}
         </div>
     );
 }

@@ -63,6 +63,20 @@
     align-items: center;
 }
 
+@media screen and (max-width: 600px) {
+    .gridContainer {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(30vw, 1fr)); /* Adjust columns based on screen width */
+      gap: 3vw; /* Increase gap for better spacing */
+      padding: 0 3vw; /* Add padding for better spacing */
+    }
+
+
+    .imageContainer {
+        height: 30vw;
+        width: auto;
+  }
+}
 .profileDisplayName {
     margin-top: 10px;
     font-size: 32px;

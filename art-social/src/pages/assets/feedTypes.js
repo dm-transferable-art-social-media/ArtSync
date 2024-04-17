@@ -1,10 +1,10 @@
 export const feedTypes = {
     digitalArt: {
-        title: "Digital Art",
+        title: "Digital",
         URI: "at://did:plc:ag6k72dxale2rghqof7dedne/app.bsky.feed.generator/aaaoxzvxrgczg"
     },
     traditionalArt: {
-        title: "Traditional Art",
+        title: "Traditional",
         URI: "at://did:plc:ag6k72dxale2rghqof7dedne/app.bsky.feed.generator/aaae6plij2kys"
     },
     photography: {
@@ -28,11 +28,11 @@ export const feedTypes = {
         URI: "at://did:plc:ag6k72dxale2rghqof7dedne/app.bsky.feed.generator/aaae6rb54b7g6"
     },
     conceptArt: {
-        title: "Concept Art",
+        title: "Concept",
         URI: "at://did:plc:ag6k72dxale2rghqof7dedne/app.bsky.feed.generator/aaae6t5suv6du"
     },
     animeArt: {
-        title: "Anime Art",
+        title: "Anime",
         URI: "at://did:plc:ag6k72dxale2rghqof7dedne/app.bsky.feed.generator/aaae6wbdkgcpi"
     },
     fanart: {

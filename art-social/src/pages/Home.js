@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import Browse from "./Browse.js";
 import {
   getMyHandle,
   tryResumeSession,
@@ -42,17 +41,12 @@ function Home() {
   }
 
   return (
-    <div style={{ display: "flex" }}>
-      <div style={{ flex: 1 }}>
-        <Browse />
-      </div>
-      <div style={{ flex: 10 }}>
+    <div>
         {loading ? (
           <p>Loading posts...</p>
         ) : (
           <Feed posts={posts} userHandle={userHandle}></Feed>
         )}
-      </div>
     </div>
   );
 }

@@ -1,45 +1,48 @@
+.tab {
+  list-style-type: none;
+  padding: 0;
+  overflow: hidden;
+  width: max-content;
+  height: min-content;
+  background-color: #99bfd7;
+  position: fixed;
+  top:5%; /* Adjust this value as needed */
+  left: 0;
+  width: 100%;
+  z-index: 100;
+}
 
+/* Adjust for smaller screens */
+@media screen and (max-width: 600px) {
   .tab {
-    list-style-type: none;
-    margin-top: 40px;
-    height: 100%;
-    padding: 0;
-    overflow: hidden;
-    width: max-content;
-    background-color: #81adc8;
-    position: fixed;
-    top: 0;
-    bottom: 0;
-    left: 0;
+    top: 8%; /* Adjust this value for smaller screens */
   }
-  
-  .tab li {
-    display: block;
-    margin-bottom: 10px;
-  }
-  
-  .tab li button {
-    display: block;
-    color: rgb(255, 255, 255);
-    background-color: #81adc8;
-    border: none;
-    text-align: center;
-    padding: 14px 16px;
-    text-decoration: none;
-    width: 100%; /* Make the buttons fill the width of the navbar */
-  }
-  
-  .tab li button:hover {
-    background-color: #111;
-  }
-  
-  .active {
-    background-color: #4CAF50;
-  }
-  
-  .logo {
-    padding-top: 1%;
-    font-family: "Segoe UI Mono";
-    text-align: center;
-  }
-  
+}
+
+.tab li {
+  display: inline-block; /* Display horizontally */
+  margin-right: 10px; /* Adjust spacing between items */
+}
+
+.tab li button {
+  color: rgb(255, 255, 255);
+  background-color: #99bfd7;
+  border: none;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+.tab li button:hover {
+  background-color: #111;
+}
+
+.active {
+  background-color: #4CAF50;
+}
+
+.logo {
+  padding-top: 1%;
+  font-family: "Segoe UI Mono";
+  text-align: center;
+}
