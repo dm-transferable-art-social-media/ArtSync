@@ -3,19 +3,24 @@
     overflow: hidden;
     display: flex;
     align-items: flex-start;
+    flex-wrap: wrap; /* Allow items to wrap onto multiple lines */
+    justify-content: center; /* Center items horizontally */
     margin: 0 auto;
-    /* Center the form-group horizontally */
     margin-top: 10px;
-    /* Add margin-top for spacing */
-    /*max-width: 800px;  Set a maximum width if needed */
     width: 70%;
     padding-top: 1%;
     padding-bottom: 4%;
     border: 1px solid gray;
     border-radius: 25px;
     background-color: #fff;
-}
-
+  }
+  
+  /* Adjust styles for smaller screens */
+  @media screen and (max-width: 768px) {
+    .postContainer {
+      width: 90%; /* Adjust width for smaller screens */
+    }
+  }
 .postTop {
     height: 30px;
     overflow: hidden;
@@ -77,12 +82,9 @@
 }
 
 .postImage img {
-    margin-top: 15px;
-    max-width: 82%;
-    max-height: 100%;
-    width: auto;
-    height: auto;
-    /* margin-left: 10%; */
+  margin-top: 15px;
+  max-width: 90%; /* Adjust image width to fit container */
+  height: auto;
 }
 
 .hashtag {

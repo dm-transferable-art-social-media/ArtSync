@@ -1,5 +1,5 @@
 import React from 'react';
-import profileStyles from '../Styles/profileStyles.module.css';
+import style from '../Styles/profileStyles.module.css';
 
 const GridView = ({ posts }) => {
   // Ensure posts is defined and not null
@@ -9,14 +9,14 @@ const GridView = ({ posts }) => {
   const postsWithImages = posts.filter(post => post?.post?.embed?.images?.[0]);
 
   return (
-    <ul className={profileStyles.gridContainer}>
+    <ul className={style.gridContainer}>
       {postsWithImages.map(post => (
-        <li key={post.post.cid}>
+        <li key={post.post.cid} className={style.gridItem}>
           {post.post.embed && post.post.embed.images && post.post.embed.images[0] && (
-            <div className={profileStyles.imageThumbnailBox}>
+            <div className={style.imageThumbnailBox}>
               <img
                 src={post.post.embed.images[0].fullsize}
-                className={profileStyles.imageThumbnail}
+                className={style.imageThumbnail}
                 alt={post.post.text} 
               />
             </div>

@@ -163,6 +163,24 @@ const UserProfile = () => {
               {profile.postsCount} Posts
             </div>
           </div>
+          {(handle == userHandle) && (
+            <div style={{ display: "flex" }}>
+              <div>
+                <div className={profileStyles.profileText}>
+                  <button
+                    style={{ backgroundColor: "#81adc8" }}
+                    className="third-button"
+                    onClick={toggleUpload}
+                  >
+                    Create Post
+                  </button>
+                </div>
+              </div>
+              <div className={profileStyles.profileText}>
+                <FetchPostsFromDatabase />
+              </div>
+            </div>
+          )}
         </div>
         <p></p>
 

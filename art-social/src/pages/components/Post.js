@@ -1,5 +1,5 @@
 import React from "react";
-import style from "../Styles/timelinePost.module.css";
+import style from "../Styles/timeline.module.css";
 import "../Styles/createPost.css";
 import { Link } from "react-router-dom";
 import { defaultAvatar } from "../assets/defaultImages";

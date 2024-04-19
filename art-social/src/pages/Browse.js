@@ -6,7 +6,7 @@ const Browse = () => {
     const navigate = useNavigate();
 
     return (
-        <div style={{width: "min-content", display: "inline-block"}}>
+        <div>
             <ul className={style.tab}>
                 {Object.entries(feedTypes).map(([type, { title }]) => (
                     <li>
