@@ -6,7 +6,7 @@
   height: min-content;
   background-color: #99bfd7;
   position: fixed;
-  top:5%; /* Adjust this value as needed */
+  top:4%; /* Adjust this value as needed */
   left: 0;
   width: 100%;
   z-index: 100;
