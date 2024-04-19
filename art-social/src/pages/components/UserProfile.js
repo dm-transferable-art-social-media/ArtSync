@@ -141,6 +141,20 @@ const UserProfile = () => {
                 </button>
               </div>
             </div>
+            <div style={{ display: "flex" }}>
+              <div className={profileStyles.profileText}>
+                <button
+                  style={{ marginLeft: "10px" }}
+                  className="third-button"
+                  onClick={toggleUpload}
+                >
+                  Create Post
+                </button>
+              </div>
+            </div>
+            <div className="button-container">
+              <FetchPostsFromDatabase />
+            </div>
 
             <div
               style={{ marginLeft: "10px", paddingTop: "5px" }}
@@ -151,13 +165,11 @@ const UserProfile = () => {
           </div>
         </div>
         <p></p>
-        <div className="button-container">
-          <FetchPostsFromDatabase />
-        </div>
+
         {loading ? (
           <p>Loading...</p>
         ) : (
-         <Feed posts={posts} userHandle={userHandle}></Feed>
+          <Feed posts={posts} userHandle={userHandle}></Feed>
         )}
       </div>
       {showFollows && (
