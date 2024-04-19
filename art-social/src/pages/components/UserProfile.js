@@ -141,30 +141,8 @@ const UserProfile = () => {
                 </button>
               </div>
             </div>
-            <div style={{ display: "flex" }}>
-              <div className={profileStyles.profileText}>
-                <button
-                  style={{ marginLeft: "10px" }}
-                  className="third-button"
-                  onClick={toggleUpload}
-                >
-                  Create Post
-                </button>
-              </div>
-            </div>
-            <div className="button-container">
-              <FetchPostsFromDatabase />
-            </div>
-
-            <div
-              style={{ marginLeft: "10px", paddingTop: "5px" }}
-              className={profileStyles.profileText}
-            >
-              {profile.postsCount} Posts
-            </div>
-          </div>
-          {(handle == userHandle) && (
-            <div style={{ display: "flex" }}>
+            {(handle == userHandle) && (
+            <div style={{ display: "flex",  marginLeft: "10px" }}>
               <div>
                 <div className={profileStyles.profileText}>
                   <button
@@ -181,6 +159,14 @@ const UserProfile = () => {
               </div>
             </div>
           )}
+
+            <div
+              style={{ marginLeft: "10px", paddingTop: "5px" }}
+              className={profileStyles.profileText}
+            >
+              {profile.postsCount} Posts
+            </div>
+          </div>
         </div>
         <p></p>
 
