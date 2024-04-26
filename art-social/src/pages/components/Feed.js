@@ -21,6 +21,9 @@ const Feed = ({ posts, userHandle }) => {
             if (post.post.author.handle == "fujimaloops.bsky.social") {
                 return;
             }
+            if (post.post.author.handle == "hoplighthope.bsky.social") {
+                return;
+            }
             else {
                 return post;
             }
