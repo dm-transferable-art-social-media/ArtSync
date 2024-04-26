@@ -15,13 +15,19 @@ const Feed = ({ posts, userHandle }) => {
 
     const filterNSFW = (posts) => {
         return posts.filter((post) => {
-            if (post.post.labels[0]) {
-                return post.post.labels[0].val != "sexual";
-            }
-            if (post.post.author.handle == "fujimaloops.bsky.social") {
+            if (post.post.labels[0] &&  post.post.labels[0].val == "sexual" ) {
                 return;
             }
-            if (post.post.author.handle == "hoplighthope.bsky.social") {
+            else if (post.post.author.handle == "fujimaloops.bsky.social") {
+                return;
+            }
+            else if (post.post.author.handle == "hoplighthope.bsky.social") {
+                return;
+            }
+            else if (post.post.author.handle == "darkeclipticheart.bsky.social") {
+                return;
+            }
+            else if (post.post.author.handle == "dejitarukuso.bsky.social") {
                 return;
             }
             else {
