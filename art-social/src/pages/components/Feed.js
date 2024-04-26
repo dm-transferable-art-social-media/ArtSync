@@ -15,10 +15,13 @@ const Feed = ({ posts, userHandle }) => {
 
     const filterNSFW = (posts) => {
         return posts.filter((post) => {
-            if (post.post.labels[0]){
+            if (post.post.labels[0]) {
                 return post.post.labels[0].val != "sexual";
             }
-            else{
+            if (post.post.author.handle == "fujimaloops.bsky.social") {
+                return;
+            }
+            else {
                 return post;
             }
         }
